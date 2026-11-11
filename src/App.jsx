@@ -7,7 +7,6 @@ import ResumeModal from './components/ResumeModal';
 
 // Sections
 import Hero from './sections/Hero';
-import MarqueeSection from './sections/MarqueeSection';
 import About from './sections/About';
 import Expertise from './sections/Expertise';
 import Skills from './sections/Skills';
@@ -23,26 +22,32 @@ export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#050816] text-[#F8FAFC] selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Cinematic Ambient Background */}
-      <InteractiveBackground />
+    <div className="relative min-h-screen bg-black text-[#F8FAFC] selection:bg-white/20 selection:text-white">
+      {/* Background ambient lighting for portfolio lower sections */}
+      <div className="relative z-0">
+        <InteractiveBackground />
+      </div>
 
       {/* Navigation */}
       <Navbar onOpenResume={() => setIsResumeOpen(true)} />
 
       {/* Main Page Sections */}
       <main className="relative z-10 flex flex-col">
+        {/* Cinematic WebGL Monochromatic Fluid Smoke Hero Section */}
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
-        <MarqueeSection />
-        <About />
-        <Expertise />
-        <Skills />
-        <Projects onSelectProject={(project) => setSelectedProject(project)} />
-        <Process />
-        <Experience />
-        <EngineeringApproach />
-        <FAQ />
-        <Contact />
+
+        {/* Portfolio Body Sections */}
+        <div className="relative z-20 bg-[#050816]/95">
+          <About />
+          <Expertise />
+          <Skills />
+          <Projects onSelectProject={(project) => setSelectedProject(project)} />
+          <Process />
+          <Experience />
+          <EngineeringApproach />
+          <FAQ />
+          <Contact />
+        </div>
       </main>
 
       {/* Footer */}

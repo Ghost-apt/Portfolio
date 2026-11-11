@@ -8,4 +8,15 @@ export default defineConfig({
     port: 3000,
     open: false,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ['three'],
+          framer: ['framer-motion'],
+          lucide: ['lucide-react'],
+        },
+      },
+    },
+  },
 });
