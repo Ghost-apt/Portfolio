@@ -9,8 +9,8 @@ export default function TechnologyMarquee({ items = marqueeTechnologies }) {
 
   return (
     <div
-      className="relative w-full max-w-full min-w-0 py-4 sm:py-5 border-t border-white/[0.08] bg-black/40 backdrop-blur-sm overflow-hidden select-none"
-      style={{ contain: 'paint' }}
+      className="relative w-full max-w-full min-w-0 py-4 sm:py-5 border-t border-white/[0.08] bg-black overflow-hidden select-none"
+      style={{ contain: 'paint', backgroundColor: '#000000' }}
     >
       {/* Edge gradient masks for seamless fade */}
       <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-36 bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none" />

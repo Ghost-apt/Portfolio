@@ -83,9 +83,10 @@ export default function FluidSmoke({
         canvas,
         antialias: false,
         powerPreference: 'high-performance',
-        alpha: false,
+        alpha: true,
+        premultipliedAlpha: false,
       });
-      renderer.setClearColor(0x000000, 1.0);
+      renderer.setClearColor(0x000000, 0.0);
       renderer.setPixelRatio(dpr);
       renderer.setSize(initialW, initialH);
     } catch (e) {
@@ -130,6 +131,7 @@ export default function FluidSmoke({
       vertexShader,
       fragmentShader,
       uniforms,
+      transparent: true,
       depthWrite: false,
       depthTest: false,
     });
@@ -287,7 +289,7 @@ export default function FluidSmoke({
       <canvas
         ref={canvasRef}
         className="block w-full h-full"
-        style={{ backgroundColor: '#000000' }}
+        style={{ backgroundColor: 'transparent' }}
       />
     </div>
   );

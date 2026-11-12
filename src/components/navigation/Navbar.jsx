@@ -57,14 +57,6 @@ export default function Navbar({ onOpenResume, links = heroNavLinks }) {
                 <span>Resume</span>
               </button>
             )}
-
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-medium text-white bg-white/[0.06] hover:bg-white hover:text-black border border-white/20 hover:border-white transition-all duration-300"
-            >
-              <span>Connect</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
           </div>
 
           {/* Mobile Menu Button */}

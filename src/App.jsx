@@ -38,7 +38,7 @@ export default function App() {
       )}
 
       {/* 2. Portfolio Body Sections */}
-      <div className="relative z-20 bg-[#050816]/95">
+      <div className="relative z-20 bg-black">
         {sections.about && <About />}
         {sections.expertise && <Expertise />}
         {sections.skills && <Skills />}
