@@ -34,15 +34,37 @@ export default function HeroContent({ onExploreClick, onContactClick }) {
           </div>
         </motion.div>
 
-        {/* Oversized Centered Headline */}
+        {/* Oversized Centered Headline with Staggered Line Reveal */}
         <motion.h1
           variants={itemFadeUpVariants}
           className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light font-display tracking-tight text-white leading-[1.08] sm:leading-[1.06] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]"
         >
-          {personalInfo.heroHeadingLine1 || "Building intelligent"}
-          <span className="block font-normal text-white">
+          <motion.span
+            className="block"
+            variants={{
+              hidden: { opacity: 0, y: 35 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+          >
+            {personalInfo.heroHeadingLine1 || "Building intelligent"}
+          </motion.span>
+          <motion.span
+            className="block font-normal text-white"
+            variants={{
+              hidden: { opacity: 0, y: 35 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+          >
             {personalInfo.heroHeadingLine2 || "digital experiences."}
-          </span>
+          </motion.span>
         </motion.h1>
 
         {/* Supporting Bio Description */}

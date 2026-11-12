@@ -30,18 +30,12 @@ export const marqueeTechnologies = [
   "Python",
   "Java",
   "Node.js",
-  "Express.js",
+  "Express",
   "MongoDB",
-  "SQL",
   "Machine Learning",
   "Generative AI",
-  "RAG Systems",
-  "Vector Search",
-  "Embeddings",
-  "Tailwind CSS",
-  "REST APIs",
+  "RAG",
   "AWS",
-  "Google Cloud",
 ];
 
 export default { navLinks, heroNavLinks, marqueeTechnologies };
