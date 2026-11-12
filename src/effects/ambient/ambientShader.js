@@ -3,11 +3,14 @@
  * GLSL SHADERS FOR CINEMATIC MONOCHROMATIC FLUID SMOKE
  * =====================================================================
  * Real-time GPU procedural volumetric smoke and liquid-silk simulation.
- * Pure monochromatic luxury with dual theme support:
- * - Dark Mode (u_theme = 0.0): Deep pitch black (#000000) with charcoal/silver smoke
- * - Light Mode (u_theme = 1.0): Clean white (#FFFFFF) with soft silver/graphite smoke
- * - Shimmering specular highlights on surface normals
- * - Natural organic fluid flow across the screen
+ * Pure monochromatic luxury with dual theme support and transparent compositing:
+ * - Transparent alpha blending so the pure black (#000000) CSS canvas shines through
+ * - Right Side: Large flowing silver-white liquid-silk formation with specular sheen
+ * - Left Side: Secondary organic smoke plume entering the viewport
+ * - Center: Organic fluid negative space keeping the main heading crisp, legible and haze-free
+ * - Dual Theme:
+ *     * Dark Mode (u_theme = 0.0): Deep black void with charcoal/silver/white ribbons
+ *     * Light Mode (u_theme = 1.0): Pure white void with delicate graphite/silver ribbons
  * - Safe GLSL math (no NaN, strictly ordered smoothstep parameters)
  */
 
@@ -31,7 +34,7 @@ export const fragmentShader = `
   // Centralized Control Uniforms
   uniform float u_animation_speed;     // Time multiplier for organic flow
   uniform float u_smoke_density;       // Base plume density multiplier
-  uniform float u_smoke_opacity;       // Overall alpha blend against pure black
+  uniform float u_smoke_opacity;       // Overall alpha blend against background
   uniform float u_smoke_brightness;    // Luminance multiplier for white/silver highlights
   uniform float u_smoke_contrast;      // Tonal threshold sharpness
   uniform float u_noise_scale;         // Spatial noise scale
@@ -93,29 +96,29 @@ export const fragmentShader = `
     float t = u_time * u_animation_speed;
 
     // Interactive pointer displacement with smooth exponential falloff
-    vec2 mouseOffset = (u_mouse - 0.5) * 0.75;
+    vec2 mouseOffset = (u_mouse - 0.5) * 0.85;
     float mouseDist = length(p - mouseOffset);
     vec2 mouseRipple = vec2(
-      sin(mouseDist * 4.5 - u_time * 0.35),
-      cos(mouseDist * 4.5 - u_time * 0.35)
-    ) * 0.06 * exp(-mouseDist * 2.2) * u_mouse_intensity;
+      sin(mouseDist * 4.5 - u_time * 0.4),
+      cos(mouseDist * 4.5 - u_time * 0.4)
+    ) * 0.07 * exp(-mouseDist * 2.0) * u_mouse_intensity;
 
-    // Layer 1: Broad volumetric ocean of smoke
+    // Layer 1: Broad volumetric drift
     float flowT = t * (u_fluid_flow_speed / 0.12);
     q = vec2(
-      fbm(p + vec2(0.0, 0.0) + vec2(flowT * 0.30, flowT * 0.16)),
-      fbm(p + vec2(5.2, 1.3) + vec2(-flowT * 0.20, flowT * 0.26))
+      fbm(p + vec2(0.0, 0.0) + vec2(flowT * 0.28, flowT * 0.14)),
+      fbm(p + vec2(5.2, 1.3) + vec2(-flowT * 0.18, flowT * 0.24))
     );
 
-    // Layer 2: Delicate flowing liquid-silk ribbons with domain warping
+    // Layer 2: Domain-warped liquid-silk turbulence
     float dist = u_distortion_strength;
     r = vec2(
-      fbm(p + dist * q + vec2(1.7, 9.2) + vec2(flowT * 0.16, -flowT * 0.22) + mouseRipple),
-      fbm(p + (dist * 0.92) * q + vec2(8.3, 2.8) + vec2(-flowT * 0.24, flowT * 0.12) - mouseRipple)
+      fbm(p + dist * q + vec2(1.7, 9.2) + vec2(flowT * 0.14, -flowT * 0.20) + mouseRipple),
+      fbm(p + (dist * 0.92) * q + vec2(8.3, 2.8) + vec2(-flowT * 0.22, flowT * 0.10) - mouseRipple)
     );
 
     // Final recursive composition
-    return fbm(p + (dist * 1.05) * r + vec2(flowT * 0.08, flowT * 0.14));
+    return fbm(p + (dist * 1.08) * r + vec2(flowT * 0.07, flowT * 0.12));
   }
 
   void main() {
@@ -130,85 +133,100 @@ export const fragmentShader = `
     vec2 r;
     float f = fluidPattern(p, q, r);
 
-    // Dynamic Theme Canvas Base
-    vec3 cBaseBg = mix(vec3(0.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), u_theme);
+    // =================================================================
+    // 3. TARGET COMPOSITION PLUME MASKS
+    // =================================================================
+    // RIGHT SIDE: Large flowing silver-white liquid-silk formation
+    vec2 plumeRightPos = (st - vec2(0.40, -0.02)) * vec2(1.0, 1.25);
+    float plumeRight = 1.0 - smoothstep(0.22 * u_blur_strength, 0.98 * u_blur_strength, length(plumeRightPos));
 
-    // 3. Volumetric Plume Masks:
-    // Main plume: graceful billow centered toward right/center
-    vec2 plume1Pos = (st - vec2(0.25, -0.05)) * vec2(0.95, 1.4);
-    float plume1 = 1.0 - smoothstep(0.20 * u_blur_strength, 0.95 * u_blur_strength, length(plume1Pos));
+    // LEFT SIDE: Smaller organic smoke formation entering the viewport
+    vec2 plumeLeftPos = (st - vec2(-0.52, 0.16)) * vec2(1.20, 1.40);
+    float plumeLeft = 1.0 - smoothstep(0.14 * u_blur_strength, 0.74 * u_blur_strength, length(plumeLeftPos));
 
-    // Secondary accent plume on left
-    vec2 plume2Pos = (st - vec2(-0.45, 0.20)) * vec2(1.2, 1.5);
-    float plume2 = 1.0 - smoothstep(0.15 * u_blur_strength, 0.70 * u_blur_strength, length(plume2Pos));
+    // CENTER: Deep black negative space around the main heading
+    // Perturbed by fluid displacement 'r' for an organic, liquid smoke wrap
+    vec2 centerOffset = st + (r - 0.5) * 0.22;
+    float centerDist = length(centerOffset * vec2(1.22, 1.80));
+    float centerNegativeSpace = smoothstep(0.18, 0.78, centerDist);
 
-    float spatialEnvelope = clamp(plume1 * 1.0 + plume2 * 0.40, 0.0, 1.0);
+    // Combine plumes with organic center negative space cutout
+    float spatialEnvelope = (plumeRight * 1.15 + plumeLeft * 0.60) * centerNegativeSpace;
+    spatialEnvelope = clamp(spatialEnvelope, 0.0, 1.0);
 
-    // Screen border vignette to guarantee pure background at edges
-    float borderFade = 1.0 - smoothstep(0.70, 1.35, length(st * vec2(0.85, 1.05)));
+    // Soft perimeter screen border fade to keep edges pure
+    float borderFade = 1.0 - smoothstep(0.70, 1.30, length(st * vec2(0.85, 1.10)));
     spatialEnvelope *= borderFade;
 
-    // 4. Threshold turbulence into distinct smoke ribbons
-    float ribbons = smoothstep(0.44, 0.76, f);
+    // 4. Threshold turbulence into distinct, silky fluid ribbons
+    float ribbons = smoothstep(0.38, 0.74, f);
     float density = ribbons * spatialEnvelope * u_smoke_density;
-    density = clamp(density, 0.0, 0.85);
+    density = clamp(density, 0.0, 1.0);
 
-    // Instant exit for void regions
-    if (density <= 0.001) {
-      gl_FragColor = vec4(cBaseBg, u_smoke_opacity);
+    // Instant exit for negative space / void regions (100% transparent)
+    if (density <= 0.002) {
+      gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
       return;
     }
 
-    // 5. Volumetric Surface Normal from Warp Vector r
+    // =================================================================
+    // 5. SURFACE NORMAL & VOLUMETRIC DIRECTIONAL LIGHTING
+    // =================================================================
     vec2 grad = (r - 0.5) * 2.0;
-    vec3 normal = normalize(vec3(-grad.x * 1.8, -grad.y * 1.8, 0.60));
+    vec3 normal = normalize(vec3(-grad.x * 2.2, -grad.y * 2.2, 0.55));
 
-    // 6. Volumetric Directional Lighting
-    // Key Light (top-right)
-    vec3 keyLightDir = normalize(vec3(0.55, 0.70, 0.45));
+    // Key Light from top-right for luminous dimensional sheen
+    vec3 keyLightDir = normalize(vec3(0.58, 0.75, 0.45));
     float diffuse = clamp(dot(normal, keyLightDir), 0.0, 1.0);
 
-    // Specular Silk Reflection (shininess 48.0 for razor-thin glints on ridges)
+    // Specular Silk Reflection for shimmering highlights on ridges
     vec3 viewDir = vec3(0.0, 0.0, 1.0);
     vec3 halfVec = normalize(keyLightDir + viewDir);
-    float spec = pow(clamp(dot(normal, halfVec), 0.0, 1.0), 48.0) * (u_highlight_intensity * 0.75);
+    float spec = pow(clamp(dot(normal, halfVec), 0.0, 1.0), 36.0) * (u_highlight_intensity * 0.95);
 
-    // Rim Light (grazing angle)
-    vec3 rimLightDir = normalize(vec3(-0.6, -0.4, 0.35));
-    float rim = pow(1.0 - clamp(dot(normal, viewDir), 0.0, 1.0), 2.5) * clamp(dot(normal, rimLightDir), 0.0, 1.0);
-    rim *= (u_highlight_intensity * 0.30);
+    // Grazing angle rim light
+    vec3 rimLightDir = normalize(vec3(-0.65, -0.35, 0.40));
+    float rim = pow(1.0 - clamp(dot(normal, viewDir), 0.0, 1.0), 2.8) * clamp(dot(normal, rimLightDir), 0.0, 1.0);
+    rim *= (u_highlight_intensity * 0.35);
 
-    // 7. Theme-Calibrated Color Palettes
-    // In Dark Mode: dark charcoal to metallic silver on pure black
-    // In Light Mode: soft silvery-grey to graphite ribbons on pure white
-    vec3 cCharcoal     = mix(vec3(0.045, 0.045, 0.052), vec3(0.93, 0.94, 0.96), u_theme);
-    vec3 cMidGrey      = mix(vec3(0.18, 0.19, 0.22),     vec3(0.83, 0.85, 0.89), u_theme);
-    vec3 cSilver       = mix(vec3(0.40, 0.42, 0.47),     vec3(0.70, 0.72, 0.77), u_theme);
-    vec3 cSilkSilver   = mix(vec3(0.58, 0.60, 0.66),     vec3(0.58, 0.60, 0.66), u_theme);
-    vec3 cSpecularSilk = mix(vec3(0.85, 0.88, 0.95),     vec3(0.96, 0.97, 1.00), u_theme);
+    // =================================================================
+    // 6. DUAL THEME COLOR PALETTES
+    // =================================================================
+    // DARK MODE: Rich charcoal base, lustrous silver ribbons, shimmering white crests
+    vec3 cDarkCharcoal = vec3(0.08, 0.09, 0.11);
+    vec3 cDarkSlate    = vec3(0.24, 0.26, 0.30);
+    vec3 cDarkSilver   = vec3(0.60, 0.64, 0.72);
+    vec3 cDarkWhite    = vec3(0.92, 0.95, 1.00);
 
-    vec3 color = mix(cBaseBg, cCharcoal, smoothstep(0.0, 0.18, density));
-    color = mix(color, cMidGrey, smoothstep(0.14, 0.50, density));
-    color = mix(color, cSilver, smoothstep(0.45, 0.80, density));
-    color = mix(color, cSilkSilver, smoothstep(0.75, 0.95, density));
+    vec3 darkSmokeColor = mix(cDarkCharcoal, cDarkSlate, smoothstep(0.05, 0.40, density));
+    darkSmokeColor = mix(darkSmokeColor, cDarkSilver, smoothstep(0.35, 0.75, density));
+    darkSmokeColor = mix(darkSmokeColor, cDarkWhite, smoothstep(0.70, 0.98, density));
+    darkSmokeColor += cDarkWhite * spec * density;
+    darkSmokeColor += cDarkSilver * rim * density;
+    darkSmokeColor += cDarkSlate * diffuse * 0.15 * density;
+    darkSmokeColor *= u_smoke_brightness;
 
-    // Specular crests & subtle rim
-    float lightMultiplier = mix(1.0, 0.6, u_theme);
-    color += cSpecularSilk * spec * density * lightMultiplier;
-    color += cSilver * rim * density * lightMultiplier;
-    color += cMidGrey * diffuse * 0.10 * density * lightMultiplier;
-    color *= u_smoke_brightness;
+    // LIGHT MODE: Soft silver & graphite ribbons on white
+    vec3 cLightSilver   = vec3(0.72, 0.74, 0.78);
+    vec3 cLightGraphite = vec3(0.42, 0.45, 0.50);
+    vec3 lightSmokeColor = mix(cLightSilver, cLightGraphite, smoothstep(0.20, 0.85, density));
+    lightSmokeColor *= (u_smoke_brightness * 0.92);
 
-    // Filmic high-frequency dithering
-    float grain = (hash(gl_FragCoord.xy + fract(u_time * 0.3)) - 0.5) * 0.005;
-    color += vec3(grain) * smoothstep(0.02, 0.25, density);
+    // Interpolate between dark and light by u_theme
+    vec3 finalColor = mix(darkSmokeColor, lightSmokeColor, u_theme);
 
-    // Guard contrast ranges
-    float maxClamp = mix(0.72, 1.00, u_theme);
-    float minClamp = mix(0.00, 0.45, u_theme);
-    color = clamp(color, vec3(minClamp), vec3(maxClamp));
+    // Filmic subtle dither to eliminate banding
+    float grain = (hash(gl_FragCoord.xy + fract(u_time * 0.25)) - 0.5) * 0.006;
+    finalColor += vec3(grain) * smoothstep(0.05, 0.40, density);
 
-    gl_FragColor = vec4(color, u_smoke_opacity);
+    // =================================================================
+    // 7. COMPOSITED TRANSPARENT ALPHA
+    // =================================================================
+    float darkAlpha  = smoothstep(0.02, 0.85, density) * 0.88 * u_smoke_opacity;
+    float lightAlpha = smoothstep(0.03, 0.90, density) * 0.38 * u_smoke_opacity;
+    float finalAlpha = mix(darkAlpha, lightAlpha, u_theme);
+
+    gl_FragColor = vec4(finalColor, finalAlpha);
   }
 `;
 

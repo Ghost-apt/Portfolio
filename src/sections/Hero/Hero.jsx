@@ -17,8 +17,8 @@ export default function Hero({ onOpenResume }) {
   return (
     <section
       id="home"
-      className="hero-section relative min-h-screen w-full max-w-full flex flex-col justify-between items-center bg-white dark:bg-black text-neutral-950 dark:text-white overflow-hidden pt-24 sm:pt-28 select-none z-10 transition-colors duration-300"
-      style={{ backgroundColor: isDark ? '#000000' : '#FFFFFF' }}
+      className="hero-section relative min-h-screen w-full max-w-full flex flex-col justify-between items-center bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-hidden pt-24 sm:pt-28 select-none z-10 transition-colors duration-300"
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Real-time WebGL GPU Fluid Smoke (Theme-Adaptive) */}
       <AmbientBackground />

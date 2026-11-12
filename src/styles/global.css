@@ -5,6 +5,8 @@
  */
 
 html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   scroll-behavior: smooth;
   color-scheme: dark;
 }
@@ -20,6 +22,12 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+
+#root {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
 }
 
 /* Dark Mode Scrollbar */

@@ -51,9 +51,6 @@ export function disposeThreeResources(mesh, renderer) {
   }
   if (renderer) {
     renderer.dispose();
-    if (renderer.forceContextLoss) {
-      renderer.forceContextLoss();
-    }
   }
 }
 

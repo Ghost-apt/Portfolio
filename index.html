@@ -6,7 +6,7 @@
       (function() {
         try {
           var saved = localStorage.getItem('anurag-portfolio-theme');
-          var theme = (saved === 'dark' || saved === 'light') ? saved : 'dark';
+          var theme = (saved === 'light') ? 'light' : 'dark';
           document.documentElement.setAttribute('data-theme', theme);
           if (theme === 'dark') {
             document.documentElement.classList.add('dark');

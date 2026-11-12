@@ -28,16 +28,16 @@ export default function HeroContent({ onExploreClick, onContactClick }) {
       >
         {/* Introduction Badge Pill */}
         <motion.div variants={itemFadeUpVariants}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 dark:bg-black/60 border border-black/15 dark:border-white/20 text-[10px] sm:text-xs font-mono tracking-[0.2em] text-neutral-800 dark:text-neutral-200 shadow-sm dark:shadow-[0_0_20px_rgba(255,255,255,0.06)] backdrop-blur-md transition-colors duration-300">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 dark:bg-black/60 border border-black/15 dark:border-white/20 text-[10px] sm:text-xs font-mono tracking-[0.2em] text-neutral-800 dark:text-neutral-200 shadow-sm backdrop-blur-md transition-colors duration-300">
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-800 dark:bg-white animate-pulse" />
             <span className="uppercase">{personalInfo.heroBadge || personalInfo.tagline}</span>
           </div>
         </motion.div>
 
-        {/* Oversized Centered Headline */}
+        {/* Oversized Centered Headline - Editorial, Crisp, Clean */}
         <motion.h1
           variants={itemFadeUpVariants}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light font-display tracking-tight text-neutral-950 dark:text-white leading-[1.08] sm:leading-[1.06] dark:drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] transition-colors duration-300"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light font-display tracking-tight text-neutral-950 dark:text-white leading-[1.08] sm:leading-[1.06] transition-colors duration-300"
         >
           {personalInfo.heroHeadingLine1 || "Building intelligent"}
           <span className="block font-normal text-neutral-950 dark:text-white">
@@ -48,7 +48,7 @@ export default function HeroContent({ onExploreClick, onContactClick }) {
         {/* Supporting Bio Description */}
         <motion.p
           variants={itemFadeUpVariants}
-          className="max-w-2xl text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-300 font-sans leading-relaxed tracking-wide font-normal dark:drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] transition-colors duration-300"
+          className="max-w-2xl text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-300 font-sans leading-relaxed tracking-wide font-normal transition-colors duration-300"
         >
           {personalInfo.heroSubtext}
         </motion.p>

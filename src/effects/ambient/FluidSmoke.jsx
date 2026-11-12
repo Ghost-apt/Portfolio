@@ -18,12 +18,14 @@ import { useTheme } from '../../hooks/useTheme';
  *
  * Implements procedural domain-warped FBM fluid dynamics in a custom GLSL shader.
  * Features:
+ * - Transparent alpha compositing (pure CSS #000000 / #FFFFFF background shines through)
  * - Dynamic uniform synchronization without WebGL context recreation
- * - Seamless Dark Mode (#000000) & Light Mode (#FFFFFF) color ramp transitions
+ * - Seamless Dark Mode & Light Mode color ramp transitions
+ * - Center negative space cutout protecting headline typography
  * - Visibility-aware rendering (pauses rAF when scrolled off-screen or tab hidden)
  * - Multi-touch & pointer gesture responsiveness with smooth lerp interpolation
  * - Hardware-adaptive DPR clamping (mobile vs desktop presets)
- * - Complete resource disposal on unmount
+ * - Complete resource disposal without destructive forceContextLoss
  */
 export default function FluidSmoke({
   config = ambientConfig,
@@ -42,7 +44,7 @@ export default function FluidSmoke({
   useEffect(() => {
     targetThemeRef.current = isDark ? 0.0 : 1.0;
     if (rendererRef.current) {
-      rendererRef.current.setClearColor(isDark ? 0x000000 : 0xffffff, 1.0);
+      rendererRef.current.setClearColor(0x000000, 0.0);
     }
   }, [isDark]);
 
@@ -89,16 +91,17 @@ export default function FluidSmoke({
     const initialW = Math.max(container.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 1920), 100);
     const initialH = Math.max(container.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 1080), 100);
 
-    // 2. WebGL Renderer
+    // 2. WebGL Renderer with Transparent Alpha Compositing
     let renderer;
     try {
       renderer = new WebGLRenderer({
         canvas,
         antialias: false,
         powerPreference: 'high-performance',
-        alpha: false,
+        alpha: true,
+        premultipliedAlpha: false,
       });
-      renderer.setClearColor(isDark ? 0x000000 : 0xffffff, 1.0);
+      renderer.setClearColor(0x000000, 0.0);
       renderer.setPixelRatio(dpr);
       renderer.setSize(initialW, initialH);
       rendererRef.current = renderer;
@@ -138,10 +141,9 @@ export default function FluidSmoke({
       u_blur_strength: { value: config.blurStrength ?? 1.2 },
       u_highlight_intensity: { value: config.highlightIntensity ?? 0.45 },
     };
-
     uniformsRef.current = uniforms;
 
-    // 4. Mesh & Material
+    // 4. Transparent Shader Material & Fullscreen Quad Geometry
     const geometry = new PlaneGeometry(2, 2);
     const material = new ShaderMaterial({
       vertexShader,
@@ -149,60 +151,55 @@ export default function FluidSmoke({
       uniforms,
       depthWrite: false,
       depthTest: false,
+      transparent: true,
     });
 
     const mesh = new Mesh(geometry, material);
     scene.add(mesh);
 
-    // 5. Smooth Cursor & Touch Tracking with Lerp
+    // 5. Responsive Resize Handler
+    const handleResize = () => {
+      if (!renderer || !canvas || !container) return;
+      const w = Math.max(container.clientWidth || window.innerWidth, 100);
+      const h = Math.max(container.clientHeight || window.innerHeight, 100);
+      const activeDpr = getClampedDpr(targetMaxDpr);
+
+      renderer.setPixelRatio(activeDpr);
+      renderer.setSize(w, h);
+      uniforms.u_resolution.value.set(w * activeDpr, h * activeDpr);
+    };
+
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    // 6. Interactive Cursor Tracking with Smooth Lerp
     let targetMouseX = 0.5;
     let targetMouseY = 0.5;
     let currentMouseX = 0.5;
     let currentMouseY = 0.5;
 
-    const handlePointerMove = (clientX, clientY) => {
+    const handleMouseMove = (e) => {
       if (!container) return;
       const rect = container.getBoundingClientRect();
-      if (rect.width > 0 && rect.height > 0) {
-        targetMouseX = Math.max(0.0, Math.min(1.0, (clientX - rect.left) / rect.width));
-        targetMouseY = Math.max(0.0, Math.min(1.0, 1.0 - (clientY - rect.top) / rect.height));
-      }
-    };
-
-    const handleMouseMove = (e) => {
-      handlePointerMove(e.clientX, e.clientY);
+      targetMouseX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      targetMouseY = Math.max(0, Math.min(1, 1.0 - (e.clientY - rect.top) / rect.height));
     };
 
     const handleTouchMove = (e) => {
-      if (e.touches && e.touches.length > 0) {
-        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      }
+      if (!container || !e.touches || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      const rect = container.getBoundingClientRect();
+      targetMouseX = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
+      targetMouseY = Math.max(0, Math.min(1, 1.0 - (touch.clientY - rect.top) / rect.height));
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchstart', handleTouchMove, { passive: true });
 
-    // 6. Viewport Resize Handler
-    const handleResize = () => {
-      if (!container || !renderer) return;
-      const width = Math.max(container.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 1920), 100);
-      const height = Math.max(container.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 1080), 100);
-      const currentDpr = getClampedDpr(targetMaxDpr);
-
-      renderer.setPixelRatio(currentDpr);
-      renderer.setSize(width, height);
-      if (uniforms.u_resolution) {
-        uniforms.u_resolution.value.set(width * currentDpr, height * currentDpr);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // 7. Visibility Observer (Pause rAF when off-screen or tab hidden to save GPU)
+    // 7. Animation Loop Control & Visibility Management
     let animationFrameId;
-    let isRunning = true;
     let lastTime = performance.now();
+    let isRunning = true;
 
     const startAnimationLoop = () => {
       if (!isRunning) {
@@ -213,8 +210,8 @@ export default function FluidSmoke({
     };
 
     const stopAnimationLoop = () => {
-      if (isRunning) {
-        isRunning = false;
+      isRunning = false;
+      if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }
     };
@@ -257,14 +254,14 @@ export default function FluidSmoke({
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // 8. Animation Loop with smooth theme interpolation
+    // 8. Continuous Animation Loop with smooth theme & mouse interpolation
     const animate = (time) => {
       if (!isRunning) return;
 
       const delta = (time - lastTime) * 0.001;
       lastTime = time;
 
-      // Update simulation time
+      // Update continuous simulation time
       uniforms.u_time.value += delta;
 
       // Smooth theme interpolation (10% per frame)
@@ -303,14 +300,14 @@ export default function FluidSmoke({
   return (
     <div
       ref={containerRef}
-      className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none transition-colors duration-300 ${className}`}
-      style={{ backgroundColor: isDark ? '#000000' : '#FFFFFF' }}
+      className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none ${className}`}
+      style={{ background: 'transparent' }}
       aria-hidden="true"
     >
       <canvas
         ref={canvasRef}
-        className="block w-full h-full transition-colors duration-300"
-        style={{ backgroundColor: isDark ? '#000000' : '#FFFFFF' }}
+        className="block w-full h-full"
+        style={{ background: 'transparent' }}
       />
     </div>
   );

@@ -17,7 +17,7 @@ function getInitialTheme() {
   if (typeof window === 'undefined') return DEFAULT_THEME;
   try {
     const saved = localStorage.getItem(THEME_STORAGE_KEY);
-    if (saved === 'dark' || saved === 'light') return saved;
+    if (saved === 'light') return 'light';
   } catch (e) {
     // LocalStorage restricted or disabled
   }

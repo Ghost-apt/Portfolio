@@ -26,6 +26,10 @@ export function useScrollProgress(sectionIds = []) {
 
       // Active section detection
       if (ids.length > 0) {
+        if (currentScrollY < 150) {
+          setActiveSection(ids[0] || 'home');
+          return;
+        }
         const offsetPosition = currentScrollY + 200;
         for (let i = ids.length - 1; i >= 0; i--) {
           const el = document.getElementById(ids[i]);

@@ -12,7 +12,7 @@ import { useTheme } from '../../hooks/useTheme';
 export default function AmbientBackground({
   config = ambientConfig,
   className = '',
-  bgClass = 'bg-black',
+  bgClass = 'bg-transparent',
 }) {
   const isWebGLSupported = useWebGLSupport();
   const prefersReducedMotion = useReducedMotion();
@@ -20,8 +20,8 @@ export default function AmbientBackground({
 
   return (
     <div
-      className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0 transition-colors duration-300 ${isDark ? bgClass : 'bg-white'} ${className}`}
-      style={{ backgroundColor: isDark ? '#000000' : '#FFFFFF' }}
+      className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0 ${className}`}
+      style={{ background: 'transparent' }}
       aria-hidden="true"
     >
       {isWebGLSupported ? (
