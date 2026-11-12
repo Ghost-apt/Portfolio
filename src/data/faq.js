@@ -40,13 +40,13 @@ export const faqData = [
     id: "collaborate",
     question: "How can someone collaborate with you?",
     answer:
-      "You can reach out through the contact form on this site, send an email directly to anurag.dev.tech@gmail.com, or connect with me on LinkedIn. I am always open to exploring compelling engineering opportunities, software consulting, and collaborative AI product development."
+      "You can reach out through the contact form on this site, send an email directly to gm956582@gmail.com, or connect with me on LinkedIn. I am always open to exploring compelling engineering opportunities, software consulting, and collaborative AI product development."
   },
   {
     id: "source-code",
     question: "Where can I explore your source code?",
     answer:
-      "You can explore my open-source projects, system architectures, and code repositories on my GitHub profile at github.com/anuragsingh. All featured projects include direct links to view code repositories and technical documentation."
+      "You can explore my open-source projects, system architectures, and code repositories on my GitHub profile at github.com/Ghost-apt. All featured projects include direct links to view code repositories and technical documentation."
   }
 ];
 

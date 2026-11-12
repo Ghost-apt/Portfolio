@@ -47,40 +47,46 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Socials & Back to Top */}
-        <div className="flex items-center gap-4">
+        {/* Social Links (Email, GitHub, LinkedIn) & Back to Top */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+          <a
+            href={socialLinks.email}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors text-xs font-mono focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
+            aria-label="Send direct email to gm956582@gmail.com"
+            title="Email: gm956582@gmail.com"
+          >
+            <Mail className="w-3.5 h-3.5 text-neutral-600 dark:text-cyan-400" />
+            <span>Email</span>
+          </a>
+
           <a
             href={socialLinks.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-600 dark:text-slate-400 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
-            aria-label="GitHub profile"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors text-xs font-mono focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
+            aria-label="GitHub profile: Ghost-apt"
+            title="GitHub: Ghost-apt"
           >
-            <Github className="w-4 h-4" />
+            <Github className="w-3.5 h-3.5 text-neutral-600 dark:text-cyan-400" />
+            <span>GitHub</span>
           </a>
 
           <a
             href={socialLinks.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-600 dark:text-slate-400 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
-            aria-label="LinkedIn profile"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors text-xs font-mono focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
+            aria-label="LinkedIn profile: Anurag Singh"
+            title="LinkedIn: Anurag Singh"
           >
-            <Linkedin className="w-4 h-4" />
-          </a>
-
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="p-2.5 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-600 dark:text-slate-400 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
-            aria-label="Send direct email"
-          >
-            <Mail className="w-4 h-4" />
+            <Linkedin className="w-3.5 h-3.5 text-neutral-600 dark:text-cyan-400" />
+            <span>LinkedIn</span>
           </a>
 
           <button
             type="button"
             onClick={scrollToTop}
-            className="p-2.5 rounded-xl bg-neutral-900 dark:bg-blue-600/20 border border-neutral-800 dark:border-cyan-400/30 text-white dark:text-cyan-400 hover:bg-neutral-800 dark:hover:bg-blue-600/30 transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
+            className="p-2 rounded-xl bg-neutral-900 dark:bg-blue-600/20 border border-neutral-800 dark:border-cyan-400/30 text-white dark:text-cyan-400 hover:bg-neutral-800 dark:hover:bg-blue-600/30 transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
             aria-label="Back to top"
             title="Scroll to top"
           >

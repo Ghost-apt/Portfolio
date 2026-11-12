@@ -49,11 +49,16 @@ export const personalInfo = {
     "I engineer intelligent digital experiences through full-stack development, artificial intelligence and modern software engineering.",
 
   // Contact points
-  email: "anurag.dev.tech@gmail.com",
+  email: "gm956582@gmail.com",
   location: "India",
   availabilityStatus: "Available for High-Impact Roles & Innovative Projects",
   
-  // ...
+  // Call to action
+  cta: {
+    heading: "Let's Connect",
+    subtext:
+      "Have an idea, an opportunity or an interesting project? Feel free to get in touch.",
+  },
 };
 ```
 
@@ -265,16 +270,47 @@ The toggle button is located at the top-right of the navbar ([`src/components/na
 
 ---
 
-## 6. Updating Social Links & Navigation
+## 6. Updating Social Links & Contact Channels
 
-### Social Links:
-Open [`src/data/socialLinks.js`](file:///c:/VS%20CODE/Portfolio/src/data/socialLinks.js) and update your URLs:
+All contact points and social channel URLs are centralized in [`src/data/socialLinks.js`](file:///c:/VS%20CODE/Portfolio/src/data/socialLinks.js) and [`src/data/personalInfo.js`](file:///c:/VS%20CODE/Portfolio/src/data/personalInfo.js).
 
+### Where to Change Each Detail:
+
+1. **Email Address (`gm956582@gmail.com`):**
+   - Open [`src/data/personalInfo.js`](file:///c:/VS%20CODE/Portfolio/src/data/personalInfo.js) and update `email`:
+     ```javascript
+     email: "gm956582@gmail.com",
+     ```
+   - Open [`src/data/socialLinks.js`](file:///c:/VS%20CODE/Portfolio/src/data/socialLinks.js) and update `email` and `rawEmail`:
+     ```javascript
+     email: "mailto:gm956582@gmail.com",
+     rawEmail: "gm956582@gmail.com",
+     ```
+   - *Note:* Also mirror in [`src/config/siteConfig.js`](file:///c:/VS%20CODE/Portfolio/src/config/siteConfig.js) (`email`) and [`index.html`](file:///c:/VS%20CODE/Portfolio/index.html) (JSON-LD schema).
+
+2. **GitHub Profile URL (`https://github.com/Ghost-apt`):**
+   - Open [`src/data/socialLinks.js`](file:///c:/VS%20CODE/Portfolio/src/data/socialLinks.js) and update:
+     ```javascript
+     github: "https://github.com/Ghost-apt",
+     githubUsername: "Ghost-apt",
+     ```
+
+3. **LinkedIn Profile URL (`https://www.linkedin.com/in/anurag-singh-33897226a/`):**
+   - Open [`src/data/socialLinks.js`](file:///c:/VS%20CODE/Portfolio/src/data/socialLinks.js) and update:
+     ```javascript
+     linkedin: "https://www.linkedin.com/in/anurag-singh-33897226a/",
+     linkedinName: "Anurag Singh",
+     ```
+
+### Complete `src/data/socialLinks.js` Template:
 ```javascript
 export const socialLinks = {
-  email: "anurag.dev.tech@gmail.com",
-  github: "https://github.com/anuragsingh",
-  linkedin: "https://linkedin.com/in/anurag-singh",
+  github: "https://github.com/Ghost-apt",
+  linkedin: "https://www.linkedin.com/in/anurag-singh-33897226a/",
+  email: "mailto:gm956582@gmail.com",
+  rawEmail: "gm956582@gmail.com",
+  githubUsername: "Ghost-apt",
+  linkedinName: "Anurag Singh",
   location: "India",
   // ...
 };

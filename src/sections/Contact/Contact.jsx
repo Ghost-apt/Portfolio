@@ -72,19 +72,16 @@ export default function Contact() {
         </div>
 
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-display text-neutral-950 dark:text-white tracking-tight leading-[1.15]">
-          Have an idea?{' '}
-          <span className="text-neutral-900 dark:text-neutral-300 block sm:inline">
-            Let's build something intelligent.
-          </span>
+          Let's Connect
         </h2>
 
-        <p className="mt-5 text-base sm:text-lg text-neutral-600 dark:text-[#94A3B8] font-sans leading-relaxed">
-          {personalInfo.cta.subtext}
+        <p className="mt-5 text-base sm:text-lg text-neutral-600 dark:text-neutral-300 font-sans leading-relaxed">
+          Have an idea, an opportunity or an interesting project? Feel free to get in touch.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 max-w-5xl mx-auto items-start">
-        {/* Left Column: Direct Connect & Socials */}
+        {/* Left Column: Direct Connect & 3 Clickable Contact Options */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -92,85 +89,117 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="lg:col-span-5 space-y-6"
         >
-          {/* Quick Copy Email Card */}
-          <div className="rounded-3xl bg-white dark:bg-[#0B1120] border border-black/10 dark:border-blue-500/20 p-6 sm:p-7 shadow-lg dark:shadow-xl">
-            <span className="text-xs font-mono text-neutral-500 dark:text-cyan-400 font-semibold tracking-wider block mb-2">
-              DIRECT EMAIL
-            </span>
-            <div className="text-sm sm:text-base font-mono text-neutral-900 dark:text-white break-all mb-4">
-              {personalInfo.email}
-            </div>
-
-            <div className="flex flex-wrap gap-2.5">
-              <MagneticButton strength={0.2}>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium text-neutral-800 dark:text-slate-200 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#101A30] dark:hover:bg-[#162244] border border-black/10 dark:border-blue-500/30 hover:border-black/20 dark:hover:border-cyan-400/50 transition-all active:scale-95"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                      <span className="text-emerald-600 dark:text-emerald-400">Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-neutral-700 dark:text-cyan-400" />
-                      <span>Copy Email</span>
-                    </>
-                  )}
-                </button>
-              </MagneticButton>
-
-              <MagneticButton strength={0.2}>
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium text-white bg-neutral-900 hover:bg-neutral-800 dark:bg-blue-600/80 dark:hover:bg-blue-600 transition-colors"
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                  <span>Open Mail Client</span>
-                </a>
-              </MagneticButton>
-            </div>
-          </div>
-
-          {/* Social Profiles */}
+          {/* 3 Clickable Contact Options Card */}
           <div className="rounded-3xl bg-white dark:bg-[#0B1120] border border-black/10 dark:border-blue-500/20 p-6 sm:p-7 shadow-lg dark:shadow-xl space-y-4">
-            <span className="text-xs font-mono text-neutral-500 dark:text-cyan-400 font-semibold tracking-wider block">
-              COLLABORATIVE CHANNELS
-            </span>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono text-neutral-500 dark:text-cyan-400 font-semibold tracking-wider block">
+                CONTACT OPTIONS
+              </span>
+              <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                Available & Responsive
+              </span>
+            </div>
 
             <div className="space-y-3">
+              {/* Option 1: Email — gm956582@gmail.com */}
+              <div className="p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/15 hover:border-black/25 dark:hover:border-cyan-400/40 transition-all group">
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  aria-label={`Send direct email to ${personalInfo.email}`}
+                  className="flex items-center justify-between text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400 rounded-lg"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0B1120] text-neutral-900 dark:text-cyan-400 group-hover:scale-110 transition-transform shrink-0">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs font-bold text-neutral-900 dark:text-white flex items-center gap-1.5">
+                        <span>Email</span>
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 text-neutral-600 dark:text-slate-300">
+                          Direct
+                        </span>
+                      </div>
+                      <div className="text-xs sm:text-sm font-mono text-neutral-600 dark:text-slate-300 truncate">
+                        {personalInfo.email}
+                      </div>
+                    </div>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-slate-500 group-hover:text-neutral-900 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-2" />
+                </a>
+
+                {/* Quick copy email action */}
+                <div className="mt-2.5 pt-2.5 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-[11px] font-mono text-neutral-500 dark:text-slate-400">
+                  <span>Click to open mail app</span>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-mono text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white bg-neutral-200/60 dark:bg-[#0B1120] hover:bg-neutral-200 dark:hover:bg-[#162244] border border-black/10 dark:border-blue-500/20 transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
+                    aria-label="Copy email address"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                        <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3 h-3 text-neutral-600 dark:text-cyan-400" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Option 2: GitHub — Ghost-apt */}
               <a
                 href={socialLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/15 hover:border-black/25 dark:hover:border-cyan-400/40 text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#162244] transition-all group"
+                aria-label="GitHub profile: Ghost-apt"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/15 hover:border-black/25 dark:hover:border-cyan-400/40 text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#162244] transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
               >
-                <div className="flex items-center gap-3">
-                  <Github className="w-5 h-5 text-neutral-900 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
-                  <div>
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0B1120] text-neutral-900 dark:text-cyan-400 group-hover:scale-110 transition-transform shrink-0">
+                    <Github className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
                     <div className="text-xs font-bold text-neutral-900 dark:text-white">GitHub</div>
-                    <div className="text-[11px] font-mono text-neutral-500 dark:text-slate-400">View Repositories & Architecture</div>
+                    <div className="text-xs sm:text-sm font-mono text-neutral-600 dark:text-slate-300">
+                      Ghost-apt
+                    </div>
+                    <div className="text-[11px] font-mono text-neutral-500 dark:text-slate-400">
+                      View Repositories & Architecture
+                    </div>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-slate-500 group-hover:text-neutral-900 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-slate-500 group-hover:text-neutral-900 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-2" />
               </a>
 
+              {/* Option 3: LinkedIn — Anurag Singh */}
               <a
                 href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/15 hover:border-black/25 dark:hover:border-cyan-400/40 text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#162244] transition-all group"
+                aria-label="LinkedIn profile: Anurag Singh"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/15 hover:border-black/25 dark:hover:border-cyan-400/40 text-neutral-700 dark:text-slate-300 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#162244] transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
               >
-                <div className="flex items-center gap-3">
-                  <Linkedin className="w-5 h-5 text-neutral-900 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
-                  <div>
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0B1120] text-neutral-900 dark:text-cyan-400 group-hover:scale-110 transition-transform shrink-0">
+                    <Linkedin className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
                     <div className="text-xs font-bold text-neutral-900 dark:text-white">LinkedIn</div>
-                    <div className="text-[11px] font-mono text-neutral-500 dark:text-slate-400">Professional Network & Inquiries</div>
+                    <div className="text-xs sm:text-sm font-mono text-neutral-600 dark:text-slate-300">
+                      Anurag Singh
+                    </div>
+                    <div className="text-[11px] font-mono text-neutral-500 dark:text-slate-400">
+                      Professional Network & Inquiries
+                    </div>
                   </div>
                 </div>
-                <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-slate-500 group-hover:text-neutral-900 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-4 h-4 text-neutral-400 dark:text-slate-500 group-hover:text-neutral-900 dark:group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ml-2" />
               </a>
             </div>
           </div>

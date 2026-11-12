@@ -47,16 +47,16 @@ export const personalInfo = {
 
   // Contact & Location Details
   location: "India",
-  email: "anurag.dev.tech@gmail.com",
+  email: "gm956582@gmail.com",
   resumePath: "/resume/Anurag_Singh_Resume.pdf",
   profileImage: "/images/profile.jpg", // Optional placeholder
   availabilityStatus: "Available for High-Impact Roles & Innovative Projects",
 
   // Call To Action (Bottom section)
   cta: {
-    heading: "Have an idea? Let's build something intelligent.",
+    heading: "Let's Connect",
     subtext:
-      "I'm always interested in connecting with developers, innovators and teams building meaningful technology. Whether you have a project in mind or want to collaborate on AI-driven products, let's talk.",
+      "Have an idea, an opportunity or an interesting project? Feel free to get in touch.",
   },
 
   // Footer Copyright

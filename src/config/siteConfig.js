@@ -23,7 +23,7 @@ export const siteConfig = {
     "Machine Learning"
   ],
   author: "Anurag Singh",
-  email: "anurag.dev.tech@gmail.com",
+  email: "gm956582@gmail.com",
   themeColor: "#050816",
   // Configurable base URL; defaults to window origin or env var without inventing a hardcoded domain
   siteUrl: typeof window !== 'undefined' ? window.location.origin : (import.meta.env?.VITE_SITE_URL || ''),
