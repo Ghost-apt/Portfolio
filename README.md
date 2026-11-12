@@ -11,6 +11,8 @@ A world-class, premium, modular personal portfolio designed and engineered for *
 
 Complete guides and audit reports are available in the [`docs/`](file:///c:/VS%20CODE/Portfolio/docs/) directory:
 
+- 🛠️ [**Post-Launch Maintenance Guide** (`docs/MAINTENANCE_GUIDE.md`)](file:///c:/VS%20CODE/Portfolio/docs/MAINTENANCE_GUIDE.md) — Monthly maintenance checklist, content update procedure, dependency updates, and rollbacks.
+- 📋 [**Phase 7 Post-Launch Report** (`docs/POST_LAUNCH_REPORT.md`)](file:///c:/VS%20CODE/Portfolio/docs/POST_LAUNCH_REPORT.md) — Monitoring strategy, baseline performance metrics, security audit, and enhancement roadmap.
 - 🚀 [**Vercel Production Deployment Guide** (`docs/VERCEL_DEPLOYMENT_GUIDE.md`)](file:///c:/VS%20CODE/Portfolio/docs/VERCEL_DEPLOYMENT_GUIDE.md) — Step-by-step instructions for deploying to Vercel, adding custom domains, and verifying HTTPS.
 - 📋 [**Phase 6 Deployment Report** (`docs/PHASE6_DEPLOYMENT_REPORT.md`)](file:///c:/VS%20CODE/Portfolio/docs/PHASE6_DEPLOYMENT_REPORT.md) — Production build inventory, security checks, and public release verification.
 - ⚡ [**Phase 5 SEO & Performance Report** (`docs/PHASE5_PRODUCTION_OPTIMIZATION_REPORT.md`)](file:///c:/VS%20CODE/Portfolio/docs/PHASE5_PRODUCTION_OPTIMIZATION_REPORT.md) — Technical SEO, WCAG 2.2 AA accessibility, Core Web Vitals, and code splitting.

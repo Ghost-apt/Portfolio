@@ -23,7 +23,7 @@ Find what you want to change in the table below to see the exact file to open:
 | **Frequently Asked Questions (FAQ Accordion)** | [`src/data/faq.js`](file:///c:/VS%20CODE/Portfolio/src/data/faq.js) |
 | **Social Links (GitHub, LinkedIn, Email, Twitter/X)** | [`src/data/socialLinks.js`](file:///c:/VS%20CODE/Portfolio/src/data/socialLinks.js) |
 | **Navigation Links & Marquee Tech Pills** | [`src/data/navigation.js`](file:///c:/VS%20CODE/Portfolio/src/data/navigation.js) |
-| **Fluid Smoke Animation (Speed, brightness, noise scale)** | [`src/effects/ambient/ambientUniforms.js`](file:///c:/VS%20CODE/Portfolio/src/effects/ambient/ambientUniforms.js) |
+| **Fluid Smoke Animation (13 Centralized Parameters)** | [`src/config/ambientConfig.js`](file:///c:/VS%20CODE/Portfolio/src/config/ambientConfig.js) |
 | **Color Palette & Design Tokens** | [`src/config/theme.js`](file:///c:/VS%20CODE/Portfolio/src/config/theme.js) & [`src/styles/variables.css`](file:///c:/VS%20CODE/Portfolio/src/styles/variables.css) |
 | **Section Visibility (Enable/disable any section)** | [`src/config/siteConfig.js`](file:///c:/VS%20CODE/Portfolio/src/config/siteConfig.js) |
 | **Resume PDF File** | [`public/resume/Anurag_Singh_Resume.pdf`](file:///c:/VS%20CODE/Portfolio/public/resume/) |
@@ -135,37 +135,57 @@ To add a new skill to any category, just add an object `{ name: "New Skill", lev
 
 ## 4. Tuning the Ambient Fluid Smoke Animation
 
-Open [`src/effects/ambient/ambientUniforms.js`](file:///c:/VS%20CODE/Portfolio/src/effects/ambient/ambientUniforms.js).
+Open [`src/config/ambientConfig.js`](file:///c:/VS%20CODE/Portfolio/src/config/ambientConfig.js).
 
-This file controls the real-time GPU WebGL shader that renders the monochromatic fluid smoke background in the Hero section. You can adjust:
+This file controls the real-time GPU WebGL shader that renders the monochromatic fluid smoke background in the Hero section and closing Contact section. You can adjust all 13 centralized parameters without editing shader math:
 
 ```javascript
-export const ambientUniformDefaults = {
-  // Speed of the organic smoke flow (Default: 0.14)
-  // Higher = faster flowing smoke; Lower = slow, cinematic drift
-  speed: 0.14,
+export const ambientConfig = {
+  // 1. Rate of internal temporal evolution (Lower = slow silk drift, Higher = faster churning)
+  animationSpeed: 0.065,
 
-  // Brightness of the smoke formation (Default: 0.88)
-  brightness: 0.88,
+  // 2. Base volume and plume fullness multiplier
+  smokeDensity: 1.15,
 
-  // Maximum opacity of the smoke layer (Default: 0.85)
-  opacity: 0.85,
+  // 3. Overall alpha transparency blending
+  smokeOpacity: 1.0,
 
-  // Fluid turbulence / domain-warping distortion intensity (Default: 1.35)
-  distortion: 1.35,
+  // 4. Multiplier scaling the brightest white/silver highlights
+  smokeBrightness: 1.08,
 
-  // Noise scale / graininess of the fractal formations (Default: 1.8)
-  noiseScale: 1.8,
+  // 5. Contrast threshold separating deep black voids from bright silk ridges
+  smokeContrast: 0.88,
 
-  // Contrast between dark voids and bright silk formations (Default: 1.45)
-  contrast: 1.45,
+  // 6. Spatial frequency of the fractal noise field (Lower = massive billows)
+  noiseScale: 2.05,
 
-  // Mouse interaction sensitivity (Default: 0.12)
-  mouseInfluence: 0.12,
+  // 7. Amplitude of recursive domain-warping vectors (eddies and silk ribbons)
+  distortionStrength: 3.2,
+
+  // 8. Rate of horizontal drift vector across the screen
+  fluidFlowSpeed: 0.12,
+
+  // 9. Sensitivity to cursor and touch displacement
+  mouseInfluence: 0.85,
+
+  // 10. Soft Gaussian falloff multiplier on plume boundaries
+  blurStrength: 1.2,
+
+  // 11. Specular reflection sheen along normal ridges (mercury highlight effect)
+  highlightIntensity: 0.45,
+
+  // 12. Mobile hardware quality profile (battery & performance)
+  mobileQuality: { maxDpr: 1.25, noiseOctaves: 4, speedMultiplier: 0.9 },
+
+  // 13. Desktop quality profile (full 6-octave fidelity)
+  desktopQuality: { maxDpr: 1.5, noiseOctaves: 6, speedMultiplier: 1.0 },
+
+  // Preset applied to the closing Contact CTA section
+  ctaSection: { /* Calmer ambient preset */ },
 };
 ```
 
-Try tweaking `speed: 0.10` for an even slower, whisper-soft atmosphere, or `distortion: 1.6` for more swirling eddies.
+Try tweaking `animationSpeed: 0.04` for an even slower, whisper-soft atmosphere, or `distortionStrength: 4.0` for more swirling eddies.
 
 ---
 
