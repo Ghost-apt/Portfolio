@@ -1,7 +1,38 @@
 /**
- * Contact section styles
+ * Contact section background styling matching index(1).html
  */
 
 .contact-section {
   position: relative;
+  background-color: transparent;
+  transition: background-color 300ms ease;
+}
+
+/* Vignette layer exactly matching index(1).html .cta-vignette */
+.contact-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.55) 65%, #050505);
+}
+
+[data-theme="light"] .contact-vignette {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4) 65%, #ffffff);
+}
+
+/* Subtle charcoal gradients in dark mode */
+[data-theme="dark"] .contact-section,
+.dark .contact-section {
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.4) 0%, rgba(11, 11, 11, 0.6) 50%, rgba(5, 5, 5, 0.4) 100%);
+}
+
+/* Light mode adaptation */
+[data-theme="light"] .contact-section,
+.light .contact-section {
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.015) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(247, 247, 247, 0.85) 50%, rgba(255, 255, 255, 0.7) 100%);
 }

@@ -21,8 +21,8 @@ export default function Projects({ onSelectProject }) {
 
   return (
     <section id="projects" className="projects-section relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Background Accent */}
-      <div className="absolute top-1/4 right-10 w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* Monochromatic Background Accent from index(1).html */}
+      <div className="absolute top-1/4 right-10 w-[550px] h-[550px] bg-white/[0.035] dark:bg-white/[0.025] rounded-full blur-[140px] pointer-events-none" />
 
       <SectionHeading
         tag="04 // PORTFOLIO"

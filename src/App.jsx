@@ -38,7 +38,7 @@ export default function App() {
       )}
 
       {/* 2. Portfolio Body Sections */}
-      <div className="relative z-20 bg-[var(--bg-secondary)] dark:bg-[#050816]/95 transition-colors duration-300">
+      <div className="relative z-20 bg-[var(--bg-secondary)] dark:bg-[var(--bg-primary)] transition-colors duration-300">
         {sections.about && <About />}
         {sections.expertise && <Expertise />}
         {sections.skills && <Skills />}

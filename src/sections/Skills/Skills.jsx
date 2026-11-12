@@ -26,8 +26,8 @@ export default function Skills() {
 
   return (
     <section id="skills" className="skills-section relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Background Accent */}
-      <div className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-[130px] pointer-events-none" />
+      {/* Monochromatic Background Accent from index(1).html */}
+      <div className="absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-white/[0.035] dark:bg-white/[0.03] rounded-full blur-[140px] pointer-events-none" />
 
       <SectionHeading
         tag="03 // ARSENAL"

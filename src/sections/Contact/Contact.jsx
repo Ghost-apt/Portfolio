@@ -58,11 +58,12 @@ export default function Contact() {
       <AmbientBackground
         config={ambientConfig.ctaSection}
         bgClass="bg-transparent"
-        className="opacity-35 mix-blend-screen pointer-events-none"
+        className="opacity-35 mix-blend-screen pointer-events-none -z-10"
       />
 
-      {/* Prominent Blurred Blue & Cyan Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] sm:w-[900px] h-[400px] sm:h-[550px] bg-gradient-to-tr from-blue-600/20 via-indigo-600/15 to-cyan-400/20 rounded-full blur-[130px] pointer-events-none -z-10" />
+      {/* Monochromatic Ambient Lighting & Vignette from index(1).html */}
+      <div className="contact-vignette" aria-hidden="true" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] sm:w-[900px] h-[400px] sm:h-[550px] bg-gradient-to-tr from-white/[0.04] via-white/[0.02] to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <div className="text-center max-w-3xl mx-auto mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100 dark:bg-[#101A30]/80 border border-black/10 dark:border-blue-500/20 text-xs font-mono tracking-wider text-neutral-800 dark:text-cyan-400 mb-4 backdrop-blur-md">
@@ -72,7 +73,7 @@ export default function Contact() {
 
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold font-display text-neutral-950 dark:text-white tracking-tight leading-[1.15]">
           Have an idea?{' '}
-          <span className="text-neutral-900 dark:text-gradient-cyan block sm:inline">
+          <span className="text-neutral-900 dark:text-neutral-300 block sm:inline">
             Let's build something intelligent.
           </span>
         </h2>
