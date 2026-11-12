@@ -1,3 +1,10 @@
+/**
+ * =====================================================================
+ * PROJECTS PORTFOLIO DATA
+ * =====================================================================
+ * Add, edit, reorder or remove projects from this single file.
+ */
+
 export const projectsData = [
   {
     id: "smartcampus-ai",
@@ -5,6 +12,9 @@ export const projectsData = [
     subtitle: "Intelligent University Management & Student Support System",
     category: "Full Stack & AI",
     badge: "Featured Platform",
+    featured: true,
+    displayOrder: 1,
+    thumbnail: "/projects/smartcampus.png",
     shortDescription:
       "An intelligent university management platform connecting students, faculty, administrators, and academic departments through integrated services and AI-powered student support.",
     detailedDescription:
@@ -34,7 +44,7 @@ export const projectsData = [
       aiService: "Python microservice for predictive analytics & recommendations",
       database: "MongoDB document store for flexible academic records"
     },
-    demoUrl: null, // Editable: set to live url when deployed
+    demoUrl: null, // Set to live URL when deployed
     githubUrl: "https://github.com/anuragsingh/smartcampus-ai",
     visualType: "campus",
     stats: [
@@ -49,6 +59,9 @@ export const projectsData = [
     subtitle: "Intelligent Candidate Screening & Document Analysis Engine",
     category: "AI / NLP",
     badge: "Machine Learning",
+    featured: true,
+    displayOrder: 2,
+    thumbnail: "/projects/resume-ai.png",
     shortDescription:
       "An AI-powered application designed to analyze resumes, process complex job descriptions, and support intelligent candidate evaluation with precision semantic matching.",
     detailedDescription:
@@ -92,6 +105,9 @@ export const projectsData = [
     subtitle: "Knowledge Graph Retrieval & Context Optimization Research",
     category: "GenAI & RAG",
     badge: "AI Research",
+    featured: true,
+    displayOrder: 3,
+    thumbnail: "/projects/graph-rag.png",
     shortDescription:
       "An AI research-oriented project exploring Graph RAG workflows, knowledge retrieval fidelity, and multi-hop reasoning evaluation in retrieval-based AI systems.",
     detailedDescription:
@@ -134,6 +150,9 @@ export const projectsData = [
     subtitle: "Enterprise Financial Operations & Account Governance",
     category: "Backend & Systems",
     badge: "System Architecture",
+    featured: true,
+    displayOrder: 4,
+    thumbnail: "/projects/bank-system.png",
     shortDescription:
       "A robust software application focused on secure banking operations, transactional integrity, and structured management of enterprise financial records.",
     detailedDescription:
@@ -170,3 +189,6 @@ export const projectsData = [
     ]
   }
 ];
+
+export const projects = projectsData;
+export default projectsData;

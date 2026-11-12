@@ -1,0 +1,17 @@
+/**
+ * Hero section layout and typography styles
+ */
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.hero-headline-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 40%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

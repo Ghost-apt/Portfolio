@@ -1,0 +1,35 @@
+/**
+ * =====================================================================
+ * CSS DESIGN VARIABLES
+ * =====================================================================
+ */
+
+:root {
+  /* Monochromatic Hero Palette */
+  --color-pure-black: #000000;
+  --color-charcoal: #09090b;
+  --color-smoke-grey: #27272a;
+  --color-silver: #a1a1aa;
+  --color-white: #ffffff;
+
+  /* Lower Portfolio Theme */
+  --primary-bg: #050816;
+  --secondary-bg: #0B1120;
+  --card-bg: #101A30;
+  --blue-accent: #3B82F6;
+  --cyan-accent: #22D3EE;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', Sora, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+}

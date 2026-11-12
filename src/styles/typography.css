@@ -1,0 +1,30 @@
+/**
+ * =====================================================================
+ * TYPOGRAPHY STYLES
+ * =====================================================================
+ */
+
+/* Editorial Gradient Text Effects */
+.text-gradient {
+  background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #22D3EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-glow {
+  background: linear-gradient(135deg, #60A5FA 0%, #22D3EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-silver-shimmer {
+  background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 40%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

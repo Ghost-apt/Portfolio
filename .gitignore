@@ -11,6 +11,15 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Test artifacts and temporary folders
+audit_results.json
+audit_phase5_results.json
+.temp_edge_*
 
 # Editor directories and files
 .vscode/*

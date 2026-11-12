@@ -1,0 +1,9 @@
+@import './variables.css';
+@import './global.css';
+@import './typography.css';
+@import './utilities.css';
+@import './responsive.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
