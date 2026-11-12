@@ -19,6 +19,7 @@ export default function AmbientBackground({
   return (
     <div
       className={`absolute inset-0 w-full h-full ${bgClass} overflow-hidden pointer-events-none select-none z-0 ${className}`}
+      style={{ backgroundColor: '#000000' }}
       aria-hidden="true"
     >
       {isWebGLSupported ? (

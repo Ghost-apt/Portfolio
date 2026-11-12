@@ -73,6 +73,9 @@ export default function FluidSmoke({
     const scene = new Scene();
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
+    const initialW = Math.max(container.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 1920), 100);
+    const initialH = Math.max(container.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 1080), 100);
+
     // 2. WebGL Renderer
     let renderer;
     try {
@@ -82,8 +85,9 @@ export default function FluidSmoke({
         powerPreference: 'high-performance',
         alpha: false,
       });
+      renderer.setClearColor(0x000000, 1.0);
       renderer.setPixelRatio(dpr);
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(initialW, initialH);
     } catch (e) {
       console.warn('WebGL initialization failed in FluidSmoke:', e);
       return;
@@ -97,8 +101,8 @@ export default function FluidSmoke({
     const uniforms = {
       u_resolution: {
         value: new Vector2(
-          container.clientWidth * dpr,
-          container.clientHeight * dpr
+          initialW * dpr,
+          initialH * dpr
         ),
       },
       u_time: { value: 0 },
@@ -142,8 +146,10 @@ export default function FluidSmoke({
     const handlePointerMove = (clientX, clientY) => {
       if (!container) return;
       const rect = container.getBoundingClientRect();
-      targetMouseX = (clientX - rect.left) / rect.width;
-      targetMouseY = 1.0 - (clientY - rect.top) / rect.height;
+      if (rect.width > 0 && rect.height > 0) {
+        targetMouseX = Math.max(0.0, Math.min(1.0, (clientX - rect.left) / rect.width));
+        targetMouseY = Math.max(0.0, Math.min(1.0, 1.0 - (clientY - rect.top) / rect.height));
+      }
     };
 
     const handleMouseMove = (e) => {
@@ -163,13 +169,15 @@ export default function FluidSmoke({
     // 6. Viewport Resize Handler
     const handleResize = () => {
       if (!container || !renderer) return;
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      const width = Math.max(container.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 1920), 100);
+      const height = Math.max(container.clientHeight || (typeof window !== 'undefined' ? window.innerHeight : 1080), 100);
       const currentDpr = getClampedDpr(targetMaxDpr);
 
       renderer.setPixelRatio(currentDpr);
       renderer.setSize(width, height);
-      uniforms.u_resolution.value.set(width * currentDpr, height * currentDpr);
+      if (uniforms.u_resolution) {
+        uniforms.u_resolution.value.set(width * currentDpr, height * currentDpr);
+      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -273,9 +281,14 @@ export default function FluidSmoke({
     <div
       ref={containerRef}
       className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none ${className}`}
+      style={{ backgroundColor: '#000000' }}
       aria-hidden="true"
     >
-      <canvas ref={canvasRef} className="block w-full h-full" />
+      <canvas
+        ref={canvasRef}
+        className="block w-full h-full"
+        style={{ backgroundColor: '#000000' }}
+      />
     </div>
   );
 }

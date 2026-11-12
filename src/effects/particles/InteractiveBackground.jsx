@@ -32,35 +32,35 @@ export default function InteractiveBackground() {
       {/* Radial Vignette */}
       <div className="absolute inset-0 bg-radial-vignette" />
 
-      {/* Primary Blurred Glowing Orbs */}
+      {/* Primary Blurred Subtle Ambient Highlights (Monochromatic) */}
       <div
-        className="absolute -top-[15%] -left-[10%] w-[650px] h-[650px] rounded-full opacity-35 blur-[130px] animate-pulse-slow"
+        className="absolute -top-[15%] -left-[10%] w-[650px] h-[650px] rounded-full opacity-15 blur-[140px] animate-pulse-slow"
         style={{
-          background: 'radial-gradient(circle, #3B82F6 0%, #1D4ED8 40%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(180, 180, 190, 0.04) 40%, transparent 70%)',
         }}
       />
 
       <div
-        className="absolute top-[35%] -right-[15%] w-[600px] h-[600px] rounded-full opacity-25 blur-[140px] animate-float-slow"
+        className="absolute top-[35%] -right-[15%] w-[600px] h-[600px] rounded-full opacity-10 blur-[140px] animate-float-slow"
         style={{
-          background: 'radial-gradient(circle, #22D3EE 0%, #6366F1 45%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(200, 205, 215, 0.10) 0%, rgba(120, 125, 135, 0.03) 45%, transparent 70%)',
         }}
       />
 
       <div
-        className="absolute bottom-[10%] left-[5%] w-[550px] h-[550px] rounded-full opacity-25 blur-[120px] animate-float-reverse"
+        className="absolute bottom-[10%] left-[5%] w-[550px] h-[550px] rounded-full opacity-10 blur-[120px] animate-float-reverse"
         style={{
-          background: 'radial-gradient(circle, #2563EB 0%, #0B1120 60%, transparent 75%)',
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(40, 40, 45, 0.04) 60%, transparent 75%)',
         }}
       />
 
       {/* Interactive Cursor Spotlight Glow (desktop only) */}
       <div
-        className="hidden md:block absolute w-[700px] h-[700px] rounded-full -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[100px] transition-opacity duration-500 pointer-events-none"
+        className="hidden md:block absolute w-[700px] h-[700px] rounded-full -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[100px] transition-opacity duration-500 pointer-events-none"
         style={{
           left: 'var(--mouse-x, 50vw)',
           top: 'var(--mouse-y, 50vh)',
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.45) 0%, rgba(34, 211, 238, 0.15) 45%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(180, 180, 190, 0.05) 45%, transparent 70%)',
         }}
       />
     </div>

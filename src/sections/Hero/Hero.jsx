@@ -15,6 +15,7 @@ export default function Hero({ onOpenResume }) {
     <section
       id="home"
       className="hero-section relative min-h-screen w-full max-w-full flex flex-col justify-between items-center bg-black text-white overflow-hidden pt-24 sm:pt-28 select-none z-10"
+      style={{ backgroundColor: '#000000' }}
     >
       {/* Real-time WebGL GPU Monochromatic Fluid Smoke */}
       <AmbientBackground />

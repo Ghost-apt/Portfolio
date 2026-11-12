@@ -28,7 +28,7 @@ export default function HeroContent({ onExploreClick, onContactClick }) {
       >
         {/* Introduction Badge Pill */}
         <motion.div variants={itemFadeUpVariants}>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/15 text-[10px] sm:text-xs font-mono tracking-[0.2em] text-neutral-300 shadow-[0_0_15px_rgba(255,255,255,0.05)] backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-white/20 text-[10px] sm:text-xs font-mono tracking-[0.2em] text-neutral-200 shadow-[0_0_20px_rgba(255,255,255,0.06)] backdrop-blur-md">
             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
             <span className="uppercase">{personalInfo.heroBadge || personalInfo.tagline}</span>
           </div>
@@ -37,10 +37,10 @@ export default function HeroContent({ onExploreClick, onContactClick }) {
         {/* Oversized Centered Headline */}
         <motion.h1
           variants={itemFadeUpVariants}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light font-display tracking-tight text-white leading-[1.08] sm:leading-[1.06]"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light font-display tracking-tight text-white leading-[1.08] sm:leading-[1.06] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]"
         >
           {personalInfo.heroHeadingLine1 || "Building intelligent"}
-          <span className="block font-normal text-transparent bg-clip-text bg-gradient-to-b from-white via-neutral-100 to-neutral-400">
+          <span className="block font-normal text-white">
             {personalInfo.heroHeadingLine2 || "digital experiences."}
           </span>
         </motion.h1>
@@ -48,7 +48,7 @@ export default function HeroContent({ onExploreClick, onContactClick }) {
         {/* Supporting Bio Description */}
         <motion.p
           variants={itemFadeUpVariants}
-          className="max-w-2xl text-sm sm:text-base md:text-lg text-neutral-400 font-sans leading-relaxed tracking-wide font-normal"
+          className="max-w-2xl text-sm sm:text-base md:text-lg text-neutral-300 font-sans leading-relaxed tracking-wide font-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]"
         >
           {personalInfo.heroSubtext}
         </motion.p>
