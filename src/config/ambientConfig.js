@@ -28,7 +28,7 @@ export const ambientConfig = {
 
   // 6. Noise Scale: Spatial frequency of the fractal noise field.
   // Smaller = massive volumetric clouds; Larger = intricate fine tendrils.
-  noiseScale: 2.6,
+  noiseScale: 2.05,
 
   // 7. Distortion Strength: Amplitude of recursive domain-warping vectors.
   // Higher = intense chaotic eddies and swirling silk ribbons; Lower = gentle ripples.
@@ -45,7 +45,7 @@ export const ambientConfig = {
 
   // 11. Highlight Intensity: Specular reflection sheen along normal ridges.
   // Produces the liquid-mercury / flowing silk highlights from reference videos.
-  highlightIntensity: 0.55,
+  highlightIntensity: 0.45,
 
   // 12. Mobile Quality Preset: Optimized for mobile and battery conservation.
   mobileQuality: {

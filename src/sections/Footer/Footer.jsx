@@ -14,22 +14,22 @@ export default function Footer() {
   };
 
   return (
-    <footer className="footer-section relative border-t border-blue-500/15 bg-[#050816] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 text-slate-400">
+    <footer className="footer-section relative border-t border-black/10 dark:border-blue-500/15 bg-neutral-100 dark:bg-[#050816] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 text-neutral-600 dark:text-slate-400">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Brand identity */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-[#101A30] border border-blue-500/30 flex items-center justify-center font-display font-bold text-sm text-cyan-400">
+            <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/30 flex items-center justify-center font-display font-bold text-sm text-neutral-900 dark:text-cyan-400">
               {personalInfo.initials || 'AS'}
             </div>
-            <span className="text-base font-bold font-display text-white tracking-wide">
+            <span className="text-base font-bold font-display text-neutral-950 dark:text-white tracking-wide">
               {personalInfo.name}
             </span>
           </div>
-          <p className="text-xs font-mono text-cyan-400/90">
+          <p className="text-xs font-mono text-neutral-700 dark:text-cyan-400/90">
             {personalInfo.professionalTitle || personalInfo.title}
           </p>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm">
+          <p className="text-xs text-neutral-500 dark:text-slate-500 mt-1 max-w-sm">
             Crafting intelligent digital experiences through full stack engineering & machine learning.
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function Footer() {
             <a
               key={link.name}
               href={link.href}
-              className="text-slate-400 hover:text-cyan-400 transition-colors"
+              className="text-neutral-600 hover:text-neutral-950 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors"
             >
               {link.name}
             </a>
@@ -53,7 +53,7 @@ export default function Footer() {
             href={socialLinks.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-[#101A30] border border-blue-500/20 text-slate-400 hover:text-white hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="p-2.5 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-600 dark:text-slate-400 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
             aria-label="GitHub profile"
           >
             <Github className="w-4 h-4" />
@@ -63,7 +63,7 @@ export default function Footer() {
             href={socialLinks.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-xl bg-[#101A30] border border-blue-500/20 text-slate-400 hover:text-white hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="p-2.5 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-600 dark:text-slate-400 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
             aria-label="LinkedIn profile"
           >
             <Linkedin className="w-4 h-4" />
@@ -71,7 +71,7 @@ export default function Footer() {
 
           <a
             href={`mailto:${personalInfo.email}`}
-            className="p-2.5 rounded-xl bg-[#101A30] border border-blue-500/20 text-slate-400 hover:text-white hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="p-2.5 rounded-xl bg-white dark:bg-[#101A30] border border-black/10 dark:border-blue-500/20 text-neutral-600 dark:text-slate-400 hover:text-neutral-950 dark:hover:text-white hover:border-black/25 dark:hover:border-cyan-400/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
             aria-label="Send direct email"
           >
             <Mail className="w-4 h-4" />
@@ -80,7 +80,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="p-2.5 rounded-xl bg-blue-600/20 border border-cyan-400/30 text-cyan-400 hover:bg-blue-600/30 transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="p-2.5 rounded-xl bg-neutral-900 dark:bg-blue-600/20 border border-neutral-800 dark:border-cyan-400/30 text-white dark:text-cyan-400 hover:bg-neutral-800 dark:hover:bg-blue-600/30 transition-all hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
             aria-label="Back to top"
             title="Scroll to top"
           >
@@ -90,9 +90,9 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono gap-3">
+      <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-black/10 dark:border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 dark:text-slate-500 font-mono gap-3">
         <span>{personalInfo.copyright}</span>
-        <span className="flex items-center gap-1.5 text-slate-400">
+        <span className="flex items-center gap-1.5 text-neutral-600 dark:text-slate-400">
           <span>Engineered with React, Vite & Tailwind CSS</span>
         </span>
       </div>

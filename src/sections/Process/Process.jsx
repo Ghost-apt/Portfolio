@@ -39,7 +39,7 @@ export default function Process() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative rounded-3xl bg-[#0B1120] border border-blue-500/20 p-7 sm:p-8 hover:border-cyan-400/40 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between shadow-xl"
+              className="group relative rounded-3xl bg-white dark:bg-[#0B1120] border border-black/10 dark:border-blue-500/20 p-7 sm:p-8 hover:border-black/25 dark:hover:border-cyan-400/40 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between shadow-lg dark:shadow-xl hover:shadow-xl group"
             >
               {/* Top ambient hover glow */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -47,32 +47,32 @@ export default function Process() {
               <div>
                 {/* Step Number & Icon */}
                 <div className="flex items-center justify-between mb-8">
-                  <span className="font-mono text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                  <span className="font-mono text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-500 dark:from-blue-400 dark:to-cyan-400">
                     {step.step}
                   </span>
-                  <div className="w-12 h-12 rounded-xl bg-[#101A30] border border-blue-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 group-hover:border-cyan-400/50 transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/30 flex items-center justify-center text-neutral-800 dark:text-cyan-400 group-hover:scale-110 group-hover:border-black/20 dark:group-hover:border-cyan-400/50 transition-all">
                     <Icon className="w-6 h-6" />
                   </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold font-display text-white group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-xl font-bold font-display text-neutral-950 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-cyan-300 transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-xs font-mono text-cyan-400/80 mt-1 mb-4">
+                <p className="text-xs font-mono text-neutral-500 dark:text-cyan-400/80 mt-1 mb-4">
                   {step.tagline}
                 </p>
 
                 {/* Description */}
-                <p className="text-sm text-[#94A3B8] leading-relaxed font-sans">
+                <p className="text-sm text-neutral-600 dark:text-[#94A3B8] leading-relaxed font-sans">
                   {step.description}
                 </p>
               </div>
 
               {/* Progress Indicator Accent */}
-              <div className="mt-8 pt-4 border-t border-blue-900/30 flex items-center justify-between text-[11px] font-mono text-slate-500">
+              <div className="mt-8 pt-4 border-t border-black/5 dark:border-blue-900/30 flex items-center justify-between text-[11px] font-mono text-neutral-400 dark:text-slate-500">
                 <span>Phase {step.step}</span>
-                <span className="w-2 h-2 rounded-full bg-cyan-400/60 group-hover:bg-cyan-400 transition-colors" />
+                <span className="w-2 h-2 rounded-full bg-neutral-900/60 dark:bg-cyan-400/60 group-hover:bg-neutral-900 dark:group-hover:bg-cyan-400 transition-colors" />
               </div>
             </motion.div>
           );

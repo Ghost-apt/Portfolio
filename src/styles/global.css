@@ -1,28 +1,28 @@
 /**
  * =====================================================================
- * GLOBAL STYLES
+ * GLOBAL STYLES & THEME TRANSITIONS
  * =====================================================================
  */
 
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
-  background-color: #000000;
+}
+
+html[data-theme="light"],
+html.light {
+  color-scheme: light;
 }
 
 body {
-  background-color: #000000;
-  color: #F8FAFC;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
 }
 
-#root {
-  background-color: #000000;
-  min-height: 100vh;
-}
-
-/* Custom Sleek Monochromatic Scrollbar */
+/* Dark Mode Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -45,7 +45,43 @@ body {
   scrollbar-color: #27272a #000000;
 }
 
+/* Light Mode Scrollbar */
+[data-theme="light"] ::-webkit-scrollbar-track,
+.light ::-webkit-scrollbar-track {
+  background: #F7F7F7;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb,
+.light ::-webkit-scrollbar-thumb {
+  background: #D4D4D8;
+  border-radius: 4px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover,
+.light ::-webkit-scrollbar-thumb:hover {
+  background: #A1A1AA;
+}
+
+[data-theme="light"] * {
+  scrollbar-color: #D4D4D8 #F7F7F7;
+}
+
 ::selection {
   background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
+}
+
+[data-theme="light"] ::selection,
+.light ::selection {
+  background: rgba(0, 0, 0, 0.15);
+  color: #000000;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -11,13 +11,15 @@ import {
 import { vertexShader, fragmentShader } from './ambientShader';
 import { ambientConfig } from '../../config/ambientConfig';
 import { getClampedDpr, disposeThreeResources } from '../webgl/webglUtils';
+import { useTheme } from '../../hooks/useTheme';
 
 /**
- * FluidSmoke - Real-time GPU fluid smoke renderer.
+ * FluidSmoke - Real-time GPU fluid smoke renderer with dual theme support.
  *
  * Implements procedural domain-warped FBM fluid dynamics in a custom GLSL shader.
  * Features:
  * - Dynamic uniform synchronization without WebGL context recreation
+ * - Seamless Dark Mode (#000000) & Light Mode (#FFFFFF) color ramp transitions
  * - Visibility-aware rendering (pauses rAF when scrolled off-screen or tab hidden)
  * - Multi-touch & pointer gesture responsiveness with smooth lerp interpolation
  * - Hardware-adaptive DPR clamping (mobile vs desktop presets)
@@ -28,10 +30,21 @@ export default function FluidSmoke({
   reducedMotion = false,
   className = '',
 }) {
+  const { theme, isDark } = useTheme();
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const uniformsRef = useRef(null);
+  const rendererRef = useRef(null);
   const isVisibleRef = useRef(true);
+  const targetThemeRef = useRef(isDark ? 0.0 : 1.0);
+
+  // Synchronize target theme value when theme switches
+  useEffect(() => {
+    targetThemeRef.current = isDark ? 0.0 : 1.0;
+    if (rendererRef.current) {
+      rendererRef.current.setClearColor(isDark ? 0x000000 : 0xffffff, 1.0);
+    }
+  }, [isDark]);
 
   // Synchronize uniforms when configuration or reduced-motion preferences change
   useEffect(() => {
@@ -83,12 +96,12 @@ export default function FluidSmoke({
         canvas,
         antialias: false,
         powerPreference: 'high-performance',
-        alpha: true,
-        premultipliedAlpha: false,
+        alpha: false,
       });
-      renderer.setClearColor(0x000000, 0.0);
+      renderer.setClearColor(isDark ? 0x000000 : 0xffffff, 1.0);
       renderer.setPixelRatio(dpr);
       renderer.setSize(initialW, initialH);
+      rendererRef.current = renderer;
     } catch (e) {
       console.warn('WebGL initialization failed in FluidSmoke:', e);
       return;
@@ -98,6 +111,8 @@ export default function FluidSmoke({
     const speed = reducedMotion
       ? 0.015
       : (config.animationSpeed ?? config.smokeSpeed ?? 0.065);
+
+    let currentThemeVal = targetThemeRef.current;
 
     const uniforms = {
       u_resolution: {
@@ -109,6 +124,7 @@ export default function FluidSmoke({
       u_time: { value: 0 },
       u_mouse: { value: new Vector2(0.5, 0.5) },
       u_mouse_intensity: { value: config.mouseInfluence ?? 0.85 },
+      u_theme: { value: currentThemeVal },
       u_animation_speed: { value: speed },
       u_smoke_density: { value: config.smokeDensity ?? 1.15 },
       u_smoke_opacity: { value: config.smokeOpacity ?? 1.0 },
@@ -131,7 +147,6 @@ export default function FluidSmoke({
       vertexShader,
       fragmentShader,
       uniforms,
-      transparent: true,
       depthWrite: false,
       depthTest: false,
     });
@@ -242,7 +257,7 @@ export default function FluidSmoke({
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // 8. Animation Loop
+    // 8. Animation Loop with smooth theme interpolation
     const animate = (time) => {
       if (!isRunning) return;
 
@@ -251,6 +266,11 @@ export default function FluidSmoke({
 
       // Update simulation time
       uniforms.u_time.value += delta;
+
+      // Smooth theme interpolation (10% per frame)
+      const targetT = targetThemeRef.current;
+      currentThemeVal += (targetT - currentThemeVal) * 0.10;
+      uniforms.u_theme.value = currentThemeVal;
 
       // Smooth mouse lerp
       currentMouseX += (targetMouseX - currentMouseX) * 0.05;
@@ -275,6 +295,7 @@ export default function FluidSmoke({
       visibilityObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
       uniformsRef.current = null;
+      rendererRef.current = null;
       disposeThreeResources(mesh, renderer);
     };
   }, []);
@@ -282,14 +303,14 @@ export default function FluidSmoke({
   return (
     <div
       ref={containerRef}
-      className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none ${className}`}
-      style={{ backgroundColor: '#000000' }}
+      className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none transition-colors duration-300 ${className}`}
+      style={{ backgroundColor: isDark ? '#000000' : '#FFFFFF' }}
       aria-hidden="true"
     >
       <canvas
         ref={canvasRef}
-        className="block w-full h-full"
-        style={{ backgroundColor: 'transparent' }}
+        className="block w-full h-full transition-colors duration-300"
+        style={{ backgroundColor: isDark ? '#000000' : '#FFFFFF' }}
       />
     </div>
   );

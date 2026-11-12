@@ -2,12 +2,49 @@
  * =====================================================================
  * DESIGN SYSTEM THEME TOKENS
  * =====================================================================
- * Central design tokens: colors, typography, border radius, and glassmorphism.
+ * Central design tokens: dark and light mode palettes, typography,
+ * border radius, and glassmorphism.
  */
 
 export const theme = {
+  // Dark Theme Palette (Default)
+  dark: {
+    bgPrimary: "#000000",
+    bgSecondary: "#0A0A0A",
+    bgCard: "#111111",
+    bgCardHover: "#171717",
+    textPrimary: "#FFFFFF",
+    textSecondary: "#B0B0B0",
+    textMuted: "#777777",
+    borderColor: "#292929",
+    borderSubtle: "rgba(255, 255, 255, 0.10)",
+    borderMedium: "rgba(255, 255, 255, 0.18)",
+    accentColor: "#FFFFFF",
+    accentSecondary: "#A1A1AA",
+    navBg: "rgba(0, 0, 0, 0.80)",
+    glassBg: "rgba(255, 255, 255, 0.04)",
+  },
+
+  // Light Theme Palette
+  light: {
+    bgPrimary: "#FFFFFF",
+    bgSecondary: "#F7F7F7",
+    bgCard: "#FFFFFF",
+    bgCardHover: "#F2F2F2",
+    textPrimary: "#111111",
+    textSecondary: "#555555",
+    textMuted: "#888888",
+    borderColor: "#E5E5E5",
+    borderSubtle: "rgba(0, 0, 0, 0.08)",
+    borderMedium: "rgba(0, 0, 0, 0.15)",
+    accentColor: "#111111",
+    accentSecondary: "#444444",
+    navBg: "rgba(255, 255, 255, 0.85)",
+    glassBg: "rgba(0, 0, 0, 0.03)",
+  },
+
+  // Backward-compatible color mapping (defaults to dark)
   colors: {
-    // Monochromatic Hero Canvas
     pureBlack: "#000000",
     charcoal: "#09090b",
     darkGrey: "#121216",
@@ -16,29 +53,23 @@ export const theme = {
     lightSilver: "#e4e4e7",
     pureWhite: "#ffffff",
 
-    // Lower Portfolio Deep Dark Palette
     bgPrimary: "#050816",
     bgSecondary: "#0B1120",
     bgCard: "#101A30",
     bgCardHover: "#162244",
 
-    // Functional & Secondary Accents
     accentBlue: "#3B82F6",
     accentCyan: "#22D3EE",
     accentIndigo: "#6366F1",
     accentEmerald: "#10B981",
 
-    // Text hierarchy
     textPrimary: "#F8FAFC",
     textSecondary: "#94A3B8",
     textMuted: "#64748B",
 
-    // Borders
     borderSubtle: "rgba(255, 255, 255, 0.08)",
     borderMedium: "rgba(255, 255, 255, 0.16)",
     borderHighlight: "rgba(255, 255, 255, 0.35)",
-    borderBlue: "rgba(59, 130, 246, 0.2)",
-    borderCyan: "rgba(34, 211, 238, 0.3)",
   },
 
   fonts: {

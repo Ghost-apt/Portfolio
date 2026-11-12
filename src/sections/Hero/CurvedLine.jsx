@@ -1,15 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../../hooks/useTheme';
 
 /**
  * CurvedLine - Elegant SVG wave path with traveling illuminated point
- * and accompanying editorial labels.
+ * and accompanying editorial labels. Adapts between Light and Dark mode.
  */
 export default function CurvedLine() {
+  const { isDark } = useTheme();
   const pathData = "M 0 38 C 240 10, 480 62, 720 35 C 960 12, 1200 58, 1440 32";
 
+  const strokeColor = isDark ? "#ffffff" : "#111111";
+  const beadColor = isDark ? "#ffffff" : "#111111";
+  const trailColor = isDark ? "#d1d5db" : "#4b5563";
+
   return (
-    <div className="relative w-full max-w-full overflow-hidden select-none pointer-events-none py-2">
+    <div className="relative w-full max-w-full overflow-hidden select-none pointer-events-none py-2 transition-colors duration-300">
       {/* SVG Curved Path & Traveling Illuminated Bead */}
       <div className="relative w-full h-14 sm:h-16 overflow-hidden">
         <svg
@@ -31,11 +37,11 @@ export default function CurvedLine() {
             </filter>
 
             <linearGradient id="curve-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.05" />
-              <stop offset="20%" stopColor="#ffffff" stopOpacity="0.22" />
-              <stop offset="50%" stopColor="#ffffff" stopOpacity="0.35" />
-              <stop offset="80%" stopColor="#ffffff" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="0.05" />
+              <stop offset="0%" stopColor={strokeColor} stopOpacity="0.05" />
+              <stop offset="20%" stopColor={strokeColor} stopOpacity="0.22" />
+              <stop offset="50%" stopColor={strokeColor} stopOpacity="0.35" />
+              <stop offset="80%" stopColor={strokeColor} stopOpacity="0.22" />
+              <stop offset="100%" stopColor={strokeColor} stopOpacity="0.05" />
             </linearGradient>
           </defs>
 
@@ -49,7 +55,7 @@ export default function CurvedLine() {
 
           {/* Primary Traveling Illuminated Point */}
           <g filter="url(#point-glow)">
-            <circle r="3.5" fill="#ffffff">
+            <circle r="3.5" fill={beadColor}>
               <animateMotion
                 path={pathData}
                 dur="9s"
@@ -64,7 +70,7 @@ export default function CurvedLine() {
 
           {/* Secondary Micro-Sparkle Traveling in Reverse */}
           <g opacity="0.6" filter="url(#point-glow)">
-            <circle r="2" fill="#d1d5db">
+            <circle r="2" fill={trailColor}>
               <animateMotion
                 path={pathData}
                 dur="14s"
@@ -80,10 +86,10 @@ export default function CurvedLine() {
       </div>
 
       {/* Editorial Labels & Scroll Indicator */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between text-[9px] sm:text-[11px] font-mono tracking-[0.25em] text-neutral-400 -mt-2">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between text-[9px] sm:text-[11px] font-mono tracking-[0.25em] text-neutral-500 dark:text-neutral-400 -mt-2 transition-colors duration-300">
         {/* Left Label */}
         <div className="flex items-center gap-2 whitespace-nowrap">
-          <span className="w-1 h-1 rounded-full bg-white/60 animate-ping" />
+          <span className="w-1 h-1 rounded-full bg-neutral-800/70 dark:bg-white/60 animate-ping" />
           <span className="uppercase">SCROLL DOWN</span>
         </div>
 
@@ -93,11 +99,11 @@ export default function CurvedLine() {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-1 opacity-75"
         >
-          <div className="w-4 h-6 rounded-full border border-white/20 flex items-start justify-center p-1">
+          <div className="w-4 h-6 rounded-full border border-black/25 dark:border-white/20 flex items-start justify-center p-1">
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-1.5 rounded-full bg-white"
+              className="w-1 h-1.5 rounded-full bg-neutral-800 dark:bg-white"
             />
           </div>
         </motion.div>
@@ -105,7 +111,7 @@ export default function CurvedLine() {
         {/* Right Label */}
         <div className="flex items-center gap-2 whitespace-nowrap">
           <span className="uppercase">TO EXPLORE MY WORK</span>
-          <span className="w-1 h-1 rounded-full bg-white/60" />
+          <span className="w-1 h-1 rounded-full bg-neutral-800/70 dark:bg-white/60" />
         </div>
       </div>
     </div>

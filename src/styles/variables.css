@@ -1,10 +1,34 @@
 /**
  * =====================================================================
- * CSS DESIGN VARIABLES
+ * CSS DESIGN VARIABLES & THEME TOKENS
  * =====================================================================
  */
 
-:root {
+/* Default Dark Theme */
+:root,
+[data-theme="dark"],
+.dark {
+  /* Exact User Dark Theme Colors */
+  --bg-primary: #000000;
+  --bg-secondary: #0A0A0A;
+  --bg-card: #111111;
+  --bg-card-hover: #171717;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0B0B0;
+  --text-muted: #777777;
+  --border-color: #292929;
+  --accent-color: #FFFFFF;
+
+  /* Additional Dark Mode Nuances */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --nav-bg: rgba(0, 0, 0, 0.80);
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  --color-scheme: dark;
+
   /* Monochromatic Hero Palette */
   --color-pure-black: #000000;
   --color-charcoal: #09090b;
@@ -12,15 +36,54 @@
   --color-silver: #a1a1aa;
   --color-white: #ffffff;
 
-  /* Lower Portfolio Theme */
-  --primary-bg: #050816;
-  --secondary-bg: #0B1120;
-  --card-bg: #101A30;
+  /* Legacy Palette Bindings for Smooth Fallback */
+  --primary-bg: #000000;
+  --secondary-bg: #0A0A0A;
+  --card-bg: #111111;
   --blue-accent: #3B82F6;
   --cyan-accent: #22D3EE;
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
+}
 
+/* Light Theme */
+[data-theme="light"],
+.light {
+  /* Exact User Light Theme Colors */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F7F7;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F2F2F2;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --border-color: #E5E5E5;
+  --accent-color: #111111;
+
+  /* Additional Light Mode Nuances */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.15);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-border: rgba(0, 0, 0, 0.10);
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+  --color-scheme: light;
+
+  /* Monochromatic Hero Palette for Light Mode */
+  --color-pure-black: #ffffff;
+  --color-charcoal: #f4f4f5;
+  --color-smoke-grey: #e4e4e7;
+  --color-silver: #71717a;
+  --color-white: #111111;
+
+  /* Legacy Palette Bindings */
+  --primary-bg: #FFFFFF;
+  --secondary-bg: #F7F7F7;
+  --card-bg: #FFFFFF;
+  --blue-accent: #2563EB;
+  --cyan-accent: #0891B2;
+}
+
+:root {
   /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Space Grotesk', Sora, sans-serif;
@@ -32,4 +95,7 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-pill: 9999px;
+
+  /* Universal Smooth Theme Transition */
+  --theme-transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease;
 }

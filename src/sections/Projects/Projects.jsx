@@ -38,16 +38,16 @@ export default function Projects({ onSelectProject }) {
             key={cat}
             type="button"
             onClick={() => setFilter(cat)}
-            className="relative px-4 py-2 rounded-full text-xs font-mono tracking-wide transition-colors border border-blue-500/20"
+            className="relative px-4 py-2 rounded-full text-xs font-mono tracking-wide transition-colors border border-black/10 dark:border-blue-500/20"
           >
             {filter === cat && (
               <motion.div
                 layoutId="activeProjectTabIndicator"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-blue-500/25"
+                className="absolute inset-0 rounded-full bg-neutral-900 dark:bg-gradient-to-r dark:from-blue-600 dark:to-cyan-500 shadow-md dark:shadow-lg dark:shadow-blue-500/25"
                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
-            <span className={`relative z-10 ${filter === cat ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'}`}>
+            <span className={`relative z-10 ${filter === cat ? 'text-white font-semibold' : 'text-neutral-600 hover:text-neutral-900 dark:text-slate-400 dark:hover:text-white'}`}>
               {cat === 'all' ? 'All Works' : cat}
             </span>
           </button>
@@ -63,7 +63,7 @@ export default function Projects({ onSelectProject }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="group relative rounded-3xl bg-[#0B1120] border border-blue-500/20 hover:border-cyan-400/40 transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_-15px_rgba(34,211,238,0.15)]"
+            className="group relative rounded-3xl bg-white dark:bg-[#0B1120] border border-black/10 dark:border-blue-500/20 hover:border-black/25 dark:hover:border-cyan-400/40 transition-all duration-500 flex flex-col justify-between overflow-hidden shadow-lg dark:shadow-2xl hover:shadow-2xl dark:hover:shadow-[0_20px_50px_-15px_rgba(34,211,238,0.15)]"
           >
             {/* Top Visual Area */}
             <div className="p-3 sm:p-4">
@@ -71,11 +71,11 @@ export default function Projects({ onSelectProject }) {
                 <ProjectVisual type={project.visualType} />
 
                 {/* Hover Quick Overlay */}
-                <div className="absolute inset-0 bg-[#050816]/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-white/85 dark:bg-[#050816]/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 backdrop-blur-sm">
                   <button
                     type="button"
                     onClick={() => onSelectProject && onSelectProject(project)}
-                    className="px-4 py-2.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg flex items-center gap-1.5 hover:scale-105 transition-transform"
+                    className="px-4 py-2.5 rounded-full text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 dark:bg-gradient-to-r dark:from-blue-600 dark:to-cyan-500 shadow-lg flex items-center gap-1.5 hover:scale-105 transition-transform"
                   >
                     <Eye className="w-3.5 h-3.5" />
                     <span>View Architecture</span>
@@ -84,7 +84,7 @@ export default function Projects({ onSelectProject }) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full text-xs font-semibold text-slate-200 bg-[#101A30] border border-slate-700 hover:border-slate-500 flex items-center gap-1.5 hover:scale-105 transition-transform"
+                    className="px-4 py-2.5 rounded-full text-xs font-semibold text-neutral-800 bg-neutral-100 border border-neutral-300 hover:bg-neutral-200 dark:text-slate-200 dark:bg-[#101A30] dark:border-slate-700 dark:hover:border-slate-500 flex items-center gap-1.5 hover:scale-105 transition-transform"
                   >
                     <Github className="w-3.5 h-3.5" />
                     <span>Source Code</span>
@@ -98,42 +98,42 @@ export default function Projects({ onSelectProject }) {
               <div>
                 {/* Category & Badge */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-xs font-mono font-medium text-cyan-400 tracking-wider">
+                  <span className="text-xs font-mono font-medium text-neutral-500 dark:text-cyan-400 tracking-wider">
                     {project.category}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-blue-950/80 text-blue-300 border border-blue-800/40">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-neutral-100 text-neutral-700 border border-neutral-200 dark:bg-blue-950/80 dark:text-blue-300 dark:border-blue-800/40">
                     {project.badge}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-neutral-950 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-cyan-300 transition-colors">
                   {project.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm font-mono text-cyan-400/80 mt-1 mb-3">
+                <p className="text-xs sm:text-sm font-mono text-neutral-600 dark:text-cyan-400/80 mt-1 mb-3">
                   {project.subtitle}
                 </p>
 
                 {/* Short Description */}
-                <p className="text-sm text-[#94A3B8] leading-relaxed font-sans line-clamp-3">
+                <p className="text-sm text-neutral-600 dark:text-[#94A3B8] leading-relaxed font-sans line-clamp-3">
                   {project.shortDescription}
                 </p>
               </div>
 
               {/* Technologies Tags */}
-              <div className="mt-6 pt-5 border-t border-blue-900/30">
+              <div className="mt-6 pt-5 border-t border-black/5 dark:border-blue-900/30">
                 <div className="flex flex-wrap gap-1.5 mb-5">
                   {project.technologies.slice(0, 5).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-[#101A30] text-slate-300 border border-blue-500/15"
+                      className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-neutral-100 text-neutral-800 border border-black/5 dark:bg-[#101A30] dark:text-slate-300 dark:border-blue-500/15"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 5 && (
-                    <span className="px-2 py-1 rounded-md text-[11px] font-mono bg-blue-950/40 text-cyan-400">
+                    <span className="px-2 py-1 rounded-md text-[11px] font-mono bg-neutral-200 text-neutral-700 dark:bg-blue-950/40 dark:text-cyan-400">
                       +{project.technologies.length - 5} more
                     </span>
                   )}
@@ -145,7 +145,7 @@ export default function Projects({ onSelectProject }) {
                     type="button"
                     data-testid="inspect-blueprint-btn"
                     onClick={() => onSelectProject && onSelectProject(project)}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors group/btn cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-900 hover:text-neutral-700 dark:text-cyan-400 dark:hover:text-cyan-300 transition-colors group/btn cursor-pointer"
                     aria-label={`Inspect architectural blueprint for ${project.title}`}
                   >
                     <span>Inspect Blueprint</span>
@@ -156,7 +156,7 @@ export default function Projects({ onSelectProject }) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-xl bg-[#101A30] border border-blue-500/20 text-slate-300 hover:text-white hover:border-cyan-400/50 transition-all"
+                    className="p-2 rounded-xl bg-neutral-100 border border-black/10 text-neutral-700 hover:text-neutral-950 hover:border-black/25 dark:bg-[#101A30] dark:border-blue-500/20 dark:text-slate-300 dark:hover:text-white dark:hover:border-cyan-400/50 transition-all"
                     aria-label={`View GitHub repository for ${project.title}`}
                   >
                     <Github className="w-4 h-4" />

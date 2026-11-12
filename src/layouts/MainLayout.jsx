@@ -21,7 +21,7 @@ export default function MainLayout({
   onCloseResume,
 }) {
   return (
-    <div className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-black text-[#F8FAFC] selection:bg-white/20 selection:text-white">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300 selection:bg-black/15 selection:text-black dark:selection:bg-white/20 dark:selection:text-white">
       {/* WCAG 2.2 AA Bypass Block: Skip to Main Content Link */}
       <a
         href="#main-content"

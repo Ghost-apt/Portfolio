@@ -23,7 +23,7 @@ export default function Experience() {
 
       <div className="relative max-w-4xl mx-auto">
         {/* Central Vertical Timeline Line */}
-        <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/40 via-cyan-400/30 to-transparent" />
+        <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-neutral-300 via-neutral-200 to-transparent dark:from-blue-500/40 dark:via-cyan-400/30 dark:to-transparent" />
 
         <div className="space-y-8 sm:space-y-12">
           {experienceTimeline.map((item, index) => (
@@ -36,7 +36,7 @@ export default function Experience() {
               className="relative flex flex-col sm:flex-row items-start gap-6 group"
             >
               {/* Timeline Icon Node */}
-              <div className="hidden sm:flex items-center justify-center w-16 h-16 rounded-2xl bg-[#101A30] border border-blue-500/40 text-cyan-400 group-hover:scale-110 group-hover:border-cyan-400 transition-all z-10 shrink-0 shadow-lg shadow-blue-950/50">
+              <div className="hidden sm:flex items-center justify-center w-16 h-16 rounded-2xl bg-neutral-100 dark:bg-[#101A30] border border-black/15 dark:border-blue-500/40 text-neutral-900 dark:text-cyan-400 group-hover:scale-110 group-hover:border-black/30 dark:group-hover:border-cyan-400 transition-all z-10 shrink-0 shadow-md dark:shadow-lg dark:shadow-blue-950/50">
                 {item.type.includes('Education') ? (
                   <GraduationCap className="w-6 h-6" />
                 ) : item.type.includes('Milestones') ? (
@@ -47,37 +47,37 @@ export default function Experience() {
               </div>
 
               {/* Timeline Content Card */}
-              <div className="flex-1 w-full rounded-3xl bg-[#0B1120] border border-blue-500/20 p-6 sm:p-8 hover:border-cyan-400/40 transition-all duration-300 shadow-xl group-hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.12)]">
+              <div className="flex-1 w-full rounded-3xl bg-white dark:bg-[#0B1120] border border-black/10 dark:border-blue-500/20 p-6 sm:p-8 hover:border-black/25 dark:hover:border-cyan-400/40 transition-all duration-300 shadow-lg dark:shadow-xl hover:shadow-xl dark:group-hover:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.12)]">
                 {/* Header with period and status */}
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-[#101A30] text-cyan-300 border border-blue-500/20">
-                    <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-neutral-100 text-neutral-800 border border-neutral-200 dark:bg-[#101A30] dark:text-cyan-300 dark:border-blue-500/20">
+                    <Calendar className="w-3.5 h-3.5 text-neutral-700 dark:text-cyan-400" />
                     {item.period}
                   </span>
-                  <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
                     {item.status}
                   </span>
                 </div>
 
                 {/* Title & Organization */}
-                <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-neutral-950 dark:text-white">
                   {item.title}
                 </h3>
-                <p className="text-sm font-mono text-cyan-400/80 mb-4">
+                <p className="text-sm font-mono text-neutral-600 dark:text-cyan-400/80 mb-4">
                   {item.organization}
                 </p>
 
                 {/* Description */}
-                <p className="text-sm sm:text-base text-[#94A3B8] leading-relaxed mb-5 font-sans">
+                <p className="text-sm sm:text-base text-neutral-600 dark:text-[#94A3B8] leading-relaxed mb-5 font-sans">
                   {item.description}
                 </p>
 
                 {/* Highlights */}
-                <div className="pt-4 border-t border-blue-900/30 space-y-2">
+                <div className="pt-4 border-t border-black/5 dark:border-blue-900/30 space-y-2">
                   {item.highlights.map((highlight, hIdx) => (
-                    <div key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 dark:text-slate-300">
+                      <CheckCircle2 className="w-4 h-4 text-neutral-900 dark:text-cyan-400 shrink-0 mt-0.5" />
                       <span>{highlight}</span>
                     </div>
                   ))}

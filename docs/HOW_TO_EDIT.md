@@ -197,17 +197,71 @@ The portfolio follows a strict two-tier palette:
 1. **Hero Section (Monochromatic)**: Pure black (`#000000`), charcoal (`#09090B`), silver (`#A1A1AA`), white (`#FFFFFF`).
 2. **Lower Portfolio Sections (Deep Space Dark)**: Deep blue background (`#050816`), card backgrounds (`#101A30`), electric blue accent (`#3B82F6`), cyan accent (`#22D3EE`).
 
-To change any accent color:
-1. Update `theme.js`:
-   ```javascript
-   accentBlue: "#3B82F6", // Change to your preferred primary accent
-   accentCyan: "#22D3EE", // Change to your preferred secondary accent
-   ```
-2. Update the corresponding CSS variables in `src/styles/variables.css`:
-   ```css
-   --blue-accent: #3B82F6;
-   --cyan-accent: #22D3EE;
-   ```
+---
+
+## 5. Customizing Dark Mode, Light Mode & Design Tokens
+
+Your portfolio features a centralized, production-grade Dual Theme System with full Dark Mode and Light Mode support.
+
+### Theme Architecture:
+- **Default Mode**: Dark Mode (`#000000` deep black space, white/silver typography, dark cards, WebGL fluid smoke).
+- **Light Mode**: Light Mode (`#FFFFFF` pure white, `#F7F7F7` soft canvas, crisp `#111111` typography, white cards with subtle borders/shadows, light WebGL fluid smoke ribbons).
+- **WebGL Shader Sync**: The fluid smoke shader interpolates between themes in real-time (`u_theme` uniform: `0.0` for Dark, `1.0` for Light) without context resets, frame drops, or flickering.
+- **Persistence**: User preference is stored in `localStorage` under `'anurag-portfolio-theme'`. An inline `<script>` in `index.html` prevents any white/dark flash on page reload.
+
+### Editing Theme Tokens:
+Open [`src/config/theme.js`](file:///c:/VS%20CODE/Portfolio/src/config/theme.js) to adjust colors for both themes:
+
+```javascript
+export const theme = {
+  // DARK MODE PALETTE
+  dark: {
+    bgPrimary: '#000000',
+    bgSecondary: '#050816',
+    bgCard: '#0B1120',
+    textPrimary: '#FFFFFF',
+    textSecondary: '#94A3B8',
+    borderColor: 'rgba(59, 130, 246, 0.20)',
+    // ...
+  },
+
+  // LIGHT MODE PALETTE
+  light: {
+    bgPrimary: '#FFFFFF',
+    bgSecondary: '#F7F7F7',
+    bgCard: '#FFFFFF',
+    textPrimary: '#111111',
+    textSecondary: '#555555',
+    borderColor: 'rgba(0, 0, 0, 0.10)',
+    // ...
+  },
+};
+```
+
+### CSS Variables:
+Open [`src/styles/variables.css`](file:///c:/VS%20CODE/Portfolio/src/styles/variables.css) to customize raw CSS variables:
+```css
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #050816;
+  --bg-card: #0B1120;
+  --text-primary: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --border-color: rgba(59, 130, 246, 0.20);
+}
+
+[data-theme="light"] {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F7F7;
+  --bg-card: #FFFFFF;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --border-color: rgba(0, 0, 0, 0.10);
+}
+```
+
+### Theme Toggle Button:
+The toggle button is located at the top-right of the navbar ([`src/components/navigation/ThemeToggle.jsx`](file:///c:/VS%20CODE/Portfolio/src/components/navigation/ThemeToggle.jsx)), adjacent to the Resume button. It features animated Moon/Sun icon morphing, micro-interactions, full keyboard accessibility, and an adaptive tooltip.
 
 ---
 

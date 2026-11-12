@@ -40,8 +40,8 @@ export default function FAQ() {
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className={`rounded-2xl transition-all duration-300 border overflow-hidden ${
                 isOpen
-                  ? 'bg-[#0B1120] border-cyan-400/40 shadow-[0_10px_30px_-10px_rgba(34,211,238,0.1)]'
-                  : 'bg-[#0B1120]/70 border-blue-500/20 hover:border-blue-500/40'
+                  ? 'bg-white dark:bg-[#0B1120] border-black/25 dark:border-cyan-400/40 shadow-md dark:shadow-[0_10px_30px_-10px_rgba(34,211,238,0.1)]'
+                  : 'bg-white/80 dark:bg-[#0B1120]/70 border-black/10 dark:border-blue-500/20 hover:border-black/20 dark:hover:border-blue-500/40'
               }`}
             >
               <button
@@ -50,17 +50,17 @@ export default function FAQ() {
                 id={`faq-question-${item.id || index}`}
                 aria-expanded={isOpen}
                 aria-controls={`faq-answer-${item.id || index}`}
-                className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-cyan-400"
               >
-                <span className="text-base sm:text-lg font-bold font-display text-white">
+                <span className="text-base sm:text-lg font-bold font-display text-neutral-950 dark:text-white">
                   {item.question}
                 </span>
 
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
                     isOpen
-                      ? 'bg-cyan-400/20 text-cyan-300'
-                      : 'bg-slate-800/80 text-slate-400'
+                      ? 'bg-neutral-900 text-white dark:bg-cyan-400/20 dark:text-cyan-300'
+                      : 'bg-neutral-100 text-neutral-700 dark:bg-slate-800/80 dark:text-slate-400'
                   }`}
                   aria-hidden="true"
                 >
@@ -79,7 +79,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                   >
-                    <div className="px-5 sm:px-6 pb-6 pt-1 text-sm sm:text-base text-[#94A3B8] leading-relaxed border-t border-blue-900/30 font-sans">
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-sm sm:text-base text-neutral-600 dark:text-[#94A3B8] leading-relaxed border-t border-black/5 dark:border-blue-900/30 font-sans">
                       {item.answer}
                     </div>
                   </motion.div>

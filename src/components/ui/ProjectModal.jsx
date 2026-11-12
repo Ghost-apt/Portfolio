@@ -35,7 +35,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md"
           />
 
           {/* Modal Container */}
@@ -47,26 +47,26 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl bg-[#0B1120] border border-blue-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 overflow-hidden my-auto max-h-[90vh] flex flex-col"
+            className="relative w-full max-w-4xl bg-white dark:bg-[#0B1120] border border-black/15 dark:border-blue-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 overflow-hidden my-auto max-h-[90vh] flex flex-col text-neutral-900 dark:text-slate-100"
           >
             {/* Ambient Background Glow inside modal */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
             {/* Modal Header */}
-            <div className="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-black/10 dark:border-slate-800">
               <div>
                 <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-blue-950/80 text-cyan-300 border border-blue-700/40">
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-neutral-100 text-neutral-800 border border-neutral-200 dark:bg-blue-950/80 dark:text-cyan-300 dark:border-blue-700/40">
                     {project.category}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-slate-800/80 text-slate-300">
+                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-neutral-100 text-neutral-700 dark:bg-slate-800/80 dark:text-slate-300">
                     {project.badge}
                   </span>
                 </div>
-                <h3 id="project-modal-title" className="text-2xl sm:text-3xl font-bold font-display text-white">
+                <h3 id="project-modal-title" className="text-2xl sm:text-3xl font-bold font-display text-neutral-950 dark:text-white">
                   {project.title}
                 </h3>
-                <p className="text-sm text-cyan-400 font-mono mt-1">
+                <p className="text-sm text-neutral-600 dark:text-cyan-400 font-mono mt-1">
                   {project.subtitle}
                 </p>
               </div>
@@ -74,7 +74,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 rounded-xl bg-slate-800/60 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors focus:outline-none"
+                className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-600 hover:text-neutral-950 dark:bg-slate-800/60 dark:hover:bg-slate-700 dark:text-slate-400 dark:hover:text-white transition-colors focus:outline-none"
                 aria-label="Close dialog"
               >
                 <X className="w-5 h-5" />
@@ -84,16 +84,16 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             {/* Scrollable Modal Body */}
             <div className="overflow-y-auto space-y-6 pt-4 pr-1">
               {/* Visual preview */}
-              <div className="w-full rounded-2xl overflow-hidden border border-blue-500/20 shadow-lg">
+              <div className="w-full rounded-2xl overflow-hidden border border-black/10 dark:border-blue-500/20 shadow-lg">
                 <ProjectVisual type={project.visualType} />
               </div>
 
               {/* Detailed Description */}
               <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-slate-400 mb-2">
                   System Overview
                 </h4>
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
+                <p className="text-sm sm:text-base text-neutral-600 dark:text-slate-300 leading-relaxed font-sans">
                   {project.detailedDescription}
                 </p>
               </div>
@@ -101,19 +101,19 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               {/* System Architecture Grid */}
               {project.architecture && (
                 <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-slate-400 mb-3">
                     Architectural Blueprint
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {Object.entries(project.architecture).map(([key, value]) => (
                       <div
                         key={key}
-                        className="p-3.5 rounded-xl bg-[#101A30]/80 border border-blue-500/15"
+                        className="p-3.5 rounded-xl bg-neutral-50 dark:bg-[#101A30]/80 border border-black/10 dark:border-blue-500/15"
                       >
-                        <div className="text-[11px] font-mono text-cyan-400 capitalize mb-1">
+                        <div className="text-[11px] font-mono text-neutral-700 dark:text-cyan-400 capitalize mb-1">
                           {key.replace(/([A-Z])/g, ' $1')}
                         </div>
-                        <div className="text-xs text-slate-200">{value}</div>
+                        <div className="text-xs text-neutral-800 dark:text-slate-200">{value}</div>
                       </div>
                     ))}
                   </div>
@@ -122,16 +122,16 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
               {/* Key Highlights */}
               <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-slate-400 mb-3">
                   Engineered Capabilities & Features
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {project.highlights.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300"
+                      className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-700 dark:text-slate-300"
                     >
-                      <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-neutral-900 dark:text-cyan-400 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -140,14 +140,14 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
               {/* Technologies */}
               <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2.5">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-slate-400 mb-2.5">
                   Verified Tech Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 rounded-lg text-xs font-mono bg-[#101A30] text-cyan-300 border border-blue-500/20"
+                      className="px-3 py-1 rounded-lg text-xs font-mono bg-neutral-100 text-neutral-800 border border-black/10 dark:bg-[#101A30] dark:text-cyan-300 dark:border-blue-500/20"
                     >
                       {tech}
                     </span>
@@ -157,8 +157,8 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             </div>
 
             {/* Modal Footer Actions */}
-            <div className="pt-4 mt-4 border-t border-slate-800 flex items-center justify-between gap-3">
-              <span className="text-xs font-mono text-slate-400 hidden sm:inline">
+            <div className="pt-4 mt-4 border-t border-black/10 dark:border-slate-800 flex items-center justify-between gap-3">
+              <span className="text-xs font-mono text-neutral-500 dark:text-slate-400 hidden sm:inline">
                 Verified implementation repository
               </span>
 
@@ -166,7 +166,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 transition-colors"
+                  className="px-4 py-2 rounded-xl text-xs font-medium text-neutral-700 hover:text-neutral-950 bg-neutral-100 hover:bg-neutral-200 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800/80 dark:hover:bg-slate-700 transition-colors"
                 >
                   Close
                 </button>
@@ -175,7 +175,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 shadow-md shadow-blue-500/20 transition-all hover:scale-[1.02]"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 dark:bg-gradient-to-r dark:from-blue-600 dark:to-cyan-500 dark:hover:from-blue-500 dark:hover:to-cyan-400 shadow-md transition-all hover:scale-[1.02]"
                 >
                   <Github className="w-4 h-4" />
                   <span>View Repository</span>

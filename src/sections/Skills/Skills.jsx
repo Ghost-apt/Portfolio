@@ -41,16 +41,16 @@ export default function Skills() {
         <button
           type="button"
           onClick={() => setSelectedCategory('all')}
-          className="relative px-4 py-2 rounded-full text-xs font-mono tracking-wide transition-colors border border-blue-500/20"
+          className="relative px-4 py-2 rounded-full text-xs font-mono tracking-wide transition-colors border border-black/10 dark:border-blue-500/20"
         >
           {selectedCategory === 'all' && (
             <motion.div
               layoutId="activeSkillTabIndicator"
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-blue-500/25"
+              className="absolute inset-0 rounded-full bg-neutral-900 dark:bg-gradient-to-r dark:from-blue-600 dark:to-cyan-500 shadow-md dark:shadow-lg dark:shadow-blue-500/25"
               transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             />
           )}
-          <span className={`relative z-10 ${selectedCategory === 'all' ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'}`}>
+          <span className={`relative z-10 ${selectedCategory === 'all' ? 'text-white font-semibold' : 'text-neutral-600 hover:text-neutral-900 dark:text-slate-400 dark:hover:text-white'}`}>
             All Domains
           </span>
         </button>
@@ -59,16 +59,16 @@ export default function Skills() {
             key={category.id}
             type="button"
             onClick={() => setSelectedCategory(category.id)}
-            className="relative px-4 py-2 rounded-full text-xs font-mono tracking-wide transition-colors border border-blue-500/20"
+            className="relative px-4 py-2 rounded-full text-xs font-mono tracking-wide transition-colors border border-black/10 dark:border-blue-500/20"
           >
             {selectedCategory === category.id && (
               <motion.div
                 layoutId="activeSkillTabIndicator"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg shadow-blue-500/25"
+                className="absolute inset-0 rounded-full bg-neutral-900 dark:bg-gradient-to-r dark:from-blue-600 dark:to-cyan-500 shadow-md dark:shadow-lg dark:shadow-blue-500/25"
                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}
-            <span className={`relative z-10 ${selectedCategory === category.id ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'}`}>
+            <span className={`relative z-10 ${selectedCategory === category.id ? 'text-white font-semibold' : 'text-neutral-600 hover:text-neutral-900 dark:text-slate-400 dark:hover:text-white'}`}>
               {category.title.split(' ')[0]}
             </span>
           </button>
@@ -89,25 +89,25 @@ export default function Skills() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="rounded-3xl bg-[#0B1120]/80 border border-blue-500/20 p-6 sm:p-7 hover:border-cyan-400/40 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.15)] group"
+                className="rounded-3xl bg-white dark:bg-[#0B1120]/80 border border-black/10 dark:border-blue-500/20 p-6 sm:p-7 hover:border-black/25 dark:hover:border-cyan-400/40 transition-all duration-300 flex flex-col justify-between shadow-lg dark:shadow-none hover:shadow-xl dark:hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.15)] group"
               >
                 <div>
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#101A30] border border-blue-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
+                    <div className="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-[#101A30] border border-black/10 dark:border-blue-500/30 flex items-center justify-center text-neutral-800 dark:text-cyan-400 group-hover:scale-105 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-bold font-display text-white">
+                      <h3 className="text-base sm:text-lg font-bold font-display text-neutral-900 dark:text-white">
                         {cat.title}
                       </h3>
-                      <p className="text-[11px] font-mono text-cyan-400/80">
+                      <p className="text-[11px] font-mono text-neutral-500 dark:text-cyan-400/80">
                         {cat.skills.length} core proficiencies
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-xs text-[#94A3B8] mb-5 leading-relaxed font-sans">
+                  <p className="text-xs text-neutral-600 dark:text-[#94A3B8] mb-5 leading-relaxed font-sans">
                     {cat.description}
                   </p>
 
@@ -118,14 +118,14 @@ export default function Skills() {
                         key={sIdx}
                         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all ${
                           skill.highlight
-                            ? 'bg-[#101A30] text-cyan-300 border border-cyan-400/30 hover:border-cyan-400'
-                            : 'bg-slate-900/70 text-slate-300 border border-slate-800 hover:border-slate-700'
+                            ? 'bg-neutral-100 text-neutral-900 border border-neutral-300 dark:bg-[#101A30] dark:text-cyan-300 dark:border-cyan-400/30 dark:hover:border-cyan-400'
+                            : 'bg-neutral-50 text-neutral-700 border border-neutral-200 dark:bg-slate-900/70 dark:text-slate-300 dark:border-slate-800 dark:hover:border-slate-700'
                         }`}
                       >
-                        <span className="w-1 h-1 rounded-full bg-cyan-400" />
+                        <span className="w-1 h-1 rounded-full bg-neutral-900 dark:bg-cyan-400" />
                         <span>{skill.name}</span>
                         {skill.tag && (
-                          <span className="text-[9px] text-slate-500 uppercase tracking-wider ml-0.5">
+                          <span className="text-[9px] text-neutral-400 dark:text-slate-500 uppercase tracking-wider ml-0.5">
                             {skill.tag}
                           </span>
                         )}
@@ -134,9 +134,9 @@ export default function Skills() {
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-blue-900/30 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                <div className="mt-6 pt-4 border-t border-black/5 dark:border-blue-900/30 flex items-center justify-between text-[11px] font-mono text-neutral-500 dark:text-slate-500">
                   <span>Verified Competency</span>
-                  <span className="text-emerald-400 flex items-center gap-1">
+                  <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-semibold">
                     <CheckCircle2 className="w-3 h-3" /> Hands-on Tested
                   </span>
                 </div>
