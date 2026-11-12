@@ -306,8 +306,9 @@ export default function FluidSmoke({
     >
       <canvas
         ref={canvasRef}
+        id="hero-fluid"
         className="block w-full h-full"
-        style={{ background: 'transparent' }}
+        style={{ background: 'transparent', opacity: 0.96 }}
       />
     </div>
   );

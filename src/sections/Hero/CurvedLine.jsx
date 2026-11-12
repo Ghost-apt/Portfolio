@@ -8,18 +8,19 @@ import { useTheme } from '../../hooks/useTheme';
  */
 export default function CurvedLine() {
   const { isDark } = useTheme();
-  const pathData = "M 0 38 C 240 10, 480 62, 720 35 C 960 12, 1200 58, 1440 32";
+  // Exact curved path from index(1).html
+  const pathData = "M-20 77 C170 77 215 78 340 67 S510 14 650 35 S815 90 960 65 S1170 10 1460 38";
 
-  const strokeColor = isDark ? "#ffffff" : "#111111";
+  const strokeColor = isDark ? "rgba(220, 220, 220, 0.58)" : "rgba(40, 40, 40, 0.38)";
   const beadColor = isDark ? "#ffffff" : "#111111";
-  const trailColor = isDark ? "#d1d5db" : "#4b5563";
+  const trailColor = isDark ? "rgba(255, 255, 255, 0.5)" : "rgba(40, 40, 40, 0.4)";
 
   return (
-    <div className="relative w-full max-w-full overflow-hidden select-none pointer-events-none py-2 transition-colors duration-300">
-      {/* SVG Curved Path & Traveling Illuminated Bead */}
-      <div className="relative w-full h-14 sm:h-16 overflow-hidden">
+    <div className="relative w-full max-w-full overflow-hidden select-none pointer-events-none py-1 transition-colors duration-300">
+      {/* SVG Curved Path & Traveling Illuminated Bead from index(1).html */}
+      <div className="relative w-full h-16 sm:h-20 overflow-hidden">
         <svg
-          viewBox="0 0 1440 70"
+          viewBox="0 0 1440 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full overflow-hidden"
@@ -35,50 +36,35 @@ export default function CurvedLine() {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-
-            <linearGradient id="curve-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor={strokeColor} stopOpacity="0.05" />
-              <stop offset="20%" stopColor={strokeColor} stopOpacity="0.22" />
-              <stop offset="50%" stopColor={strokeColor} stopOpacity="0.35" />
-              <stop offset="80%" stopColor={strokeColor} stopOpacity="0.22" />
-              <stop offset="100%" stopColor={strokeColor} stopOpacity="0.05" />
-            </linearGradient>
           </defs>
 
-          {/* Background Ambient Ghost Path */}
+          {/* Background Ambient Wave Path from index(1).html */}
           <path
             d={pathData}
-            stroke="url(#curve-gradient)"
-            strokeWidth="1.2"
+            stroke={strokeColor}
+            strokeWidth="1"
             strokeLinecap="round"
+            className="curve-path"
           />
 
-          {/* Primary Traveling Illuminated Point */}
+          {/* Primary Traveling Illuminated Point from index(1).html */}
           <g filter="url(#point-glow)">
-            <circle r="3.5" fill={beadColor}>
+            <circle r="3" fill={beadColor} className="curve-dot">
               <animateMotion
                 path={pathData}
                 dur="9s"
                 repeatCount="indefinite"
-                keyPoints="0;1;0"
-                keyTimes="0;0.5;1"
-                calcMode="spline"
-                keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
               />
             </circle>
           </g>
 
-          {/* Secondary Micro-Sparkle Traveling in Reverse */}
-          <g opacity="0.6" filter="url(#point-glow)">
-            <circle r="2" fill={trailColor}>
+          {/* Subtle Secondary Ambient Dot for Depth */}
+          <g opacity="0.45" filter="url(#point-glow)">
+            <circle r="1.8" fill={trailColor}>
               <animateMotion
                 path={pathData}
-                dur="14s"
+                dur="15s"
                 repeatCount="indefinite"
-                keyPoints="1;0;1"
-                keyTimes="0;0.5;1"
-                calcMode="spline"
-                keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
               />
             </circle>
           </g>

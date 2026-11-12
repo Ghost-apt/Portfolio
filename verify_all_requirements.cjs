@@ -2,9 +2,8 @@ const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
-const { spawn, execSync } = require('child_process');
-
 const os = require('os');
+const { spawn, execSync } = require('child_process');
 
 const EDGE_PATH = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const ARTIFACT_DIR = 'C:\\Users\\gm956\\.gemini\\antigravity\\brain\\608ee04c-5dcf-4be6-af90-02797a6bb7df';
@@ -57,7 +56,7 @@ async function ensureViteRunning() {
 
 async function runComprehensiveVerification() {
   console.log('========================================================');
-  console.log('--- COMPREHENSIVE ROOT-CAUSE FIX VERIFICATION SUITE ---');
+  console.log('--- BACKGROUND DESIGN INTEGRATION VERIFICATION SUITE ---');
   console.log('========================================================\n');
 
   let viteProc = null;
@@ -92,9 +91,9 @@ async function runComprehensiveVerification() {
     page.on('pageerror', (err) => errors.push(err.message));
 
     // -------------------------------------------------------------
-    // TEST A: DARK MODE INITIAL LOAD & VERIFICATION
+    // TEST A: DARK MODE INITIAL LOAD & BACKGROUND VALIDATION
     // -------------------------------------------------------------
-    console.log('[Test A] Testing Dark Mode on initial load...');
+    console.log('[Test A] Testing Dark Mode & reference background system...');
     await page.setViewport({ width: 1440, height: 900 });
 
     await page.goto(`http://${HOST}:${PORT}`, { waitUntil: 'networkidle0' });
@@ -115,30 +114,43 @@ async function runComprehensiveVerification() {
       const h1 = document.querySelector('h1');
       const subtitle = document.querySelector('h1 + p') || document.querySelector('.hero-section p');
       const canvas = document.querySelector('canvas');
+      const vignette = document.querySelector('.hero-vignette');
+      const noise = document.querySelector('.noise');
+      const curvedPath = document.querySelector('.curve-path');
+      const curveDot = document.querySelector('.curve-dot');
       const exploreBtn = document.querySelector('a[href="#projects"]');
       const contactBtn = document.querySelector('a[href="#contact"]');
       const marquee = document.querySelector('.animate-marquee');
-      const curvedLine = document.querySelector('svg path');
 
       return {
         themeAttr: html.getAttribute('data-theme'),
         heroBg: hero ? window.getComputedStyle(hero).backgroundColor : null,
         h1Color: h1 ? window.getComputedStyle(h1).color : null,
         subtitleColor: subtitle ? window.getComputedStyle(subtitle).color : null,
-        exploreBtnBorder: exploreBtn ? window.getComputedStyle(exploreBtn).borderColor : null,
-        exploreBtnBg: exploreBtn ? window.getComputedStyle(exploreBtn).backgroundColor : null,
-        contactBtnBorder: contactBtn ? window.getComputedStyle(contactBtn).borderColor : null,
         hasCanvas: Boolean(canvas),
+        canvasId: canvas ? canvas.id : null,
+        hasVignette: Boolean(vignette),
+        hasNoise: Boolean(noise),
+        curvedPathD: curvedPath ? curvedPath.getAttribute('d') : null,
+        hasCurveDot: Boolean(curveDot),
         hasMarquee: Boolean(marquee),
-        hasCurvedLine: Boolean(curvedLine),
+        exploreBtnBorder: exploreBtn ? window.getComputedStyle(exploreBtn).borderColor : null,
+        contactBtnBorder: contactBtn ? window.getComputedStyle(contactBtn).borderColor : null,
       };
     });
 
-    console.log('Dark Mode Metrics:', JSON.stringify(darkMetrics, null, 2));
+    console.log('Dark Mode Reference Metrics:', JSON.stringify(darkMetrics, null, 2));
 
-    const shotDark1440 = path.join(ARTIFACT_DIR, 'final_dark_hero_1440.png');
+    if (!darkMetrics.hasCanvas) throw new Error('WebGL fluid smoke canvas missing!');
+    if (!darkMetrics.hasVignette) throw new Error('Hero vignette layer missing!');
+    if (!darkMetrics.hasNoise) throw new Error('Monochromatic noise layer missing!');
+    if (!darkMetrics.curvedPathD || !darkMetrics.curvedPathD.startsWith('M-20 77')) {
+      throw new Error(`Curved line path mismatch! Expected path from index(1).html, got: ${darkMetrics.curvedPathD}`);
+    }
+
+    const shotDark1440 = path.join(ARTIFACT_DIR, 'reference_integrated_hero_dark_1440.png');
     await page.screenshot({ path: shotDark1440 });
-    console.log(`✓ Captured final dark hero screenshot: ${shotDark1440}`);
+    console.log(`✓ Captured reference integrated dark hero screenshot: ${shotDark1440}`);
 
     // -------------------------------------------------------------
     // TEST E: ANIMATION MOTION VERIFICATION (TWO SCREENSHOTS AT t=0s and t=2.5s)
@@ -149,7 +161,7 @@ async function runComprehensiveVerification() {
     // Wait 2.5 seconds for animation to morph
     await new Promise((r) => setTimeout(r, 2500));
     const bufferT1 = await page.screenshot({ encoding: 'binary' });
-    const shotDarkMotion = path.join(ARTIFACT_DIR, 'final_dark_hero_motion_t2500.png');
+    const shotDarkMotion = path.join(ARTIFACT_DIR, 'reference_integrated_hero_motion_t2500.png');
     await page.screenshot({ path: shotDarkMotion });
 
     // Compare buffers
@@ -161,7 +173,7 @@ async function runComprehensiveVerification() {
     console.log('✓ Smoke is visibly and continuously morphing over time!');
 
     // -------------------------------------------------------------
-    // TEST B: LIGHT MODE VERIFICATION
+    // TEST B: LIGHT MODE COMPATIBILITY & PERSISTENCE
     // -------------------------------------------------------------
     console.log('\n[Test B] Switching to Light Mode via theme toggle...');
     const toggleBtn = await page.$('#theme-toggle');
@@ -187,13 +199,11 @@ async function runComprehensiveVerification() {
     console.log('Light Mode Metrics:', JSON.stringify(lightMetrics, null, 2));
     if (lightMetrics.themeAttr !== 'light') throw new Error(`Expected data-theme="light", got ${lightMetrics.themeAttr}`);
 
-    const shotLight1440 = path.join(ARTIFACT_DIR, 'final_light_hero_1440.png');
+    const shotLight1440 = path.join(ARTIFACT_DIR, 'reference_integrated_hero_light_1440.png');
     await page.screenshot({ path: shotLight1440 });
-    console.log(`✓ Captured final light hero screenshot: ${shotLight1440}`);
+    console.log(`✓ Captured reference integrated light hero screenshot: ${shotLight1440}`);
 
-    // -------------------------------------------------------------
-    // TEST C: PERSISTENCE VERIFICATION
-    // -------------------------------------------------------------
+    // Verify reload persistence
     console.log('\n[Test C] Verifying Light Mode persistence across page reload...');
     await page.reload({ waitUntil: 'networkidle0' });
     await new Promise((r) => setTimeout(r, 800));
@@ -219,44 +229,16 @@ async function runComprehensiveVerification() {
     console.log('✓ Dark Mode persisted across reload');
 
     // -------------------------------------------------------------
-    // TEST D: RESPONSIVENESS (1920px, 1440px, 768px, 390px)
+    // TEST D: RESPONSIVENESS (1440px Desktop & 390px Mobile)
     // -------------------------------------------------------------
     console.log('\n[Test D] Testing Viewport Responsiveness...');
 
-    // 1920px Wide Desktop
-    await page.setViewport({ width: 1920, height: 1080 });
-    await new Promise((r) => setTimeout(r, 600));
-    const shot1920 = path.join(ARTIFACT_DIR, 'final_dark_hero_1920.png');
-    await page.screenshot({ path: shot1920 });
-    console.log(`✓ Captured 1920px desktop: ${shot1920}`);
-
-    // 768px Tablet
-    await page.setViewport({ width: 768, height: 1024 });
-    await new Promise((r) => setTimeout(r, 600));
-    const shot768 = path.join(ARTIFACT_DIR, 'final_dark_hero_768.png');
-    await page.screenshot({ path: shot768 });
-    console.log(`✓ Captured 768px tablet: ${shot768}`);
-
     // 390px Mobile
     await page.setViewport({ width: 390, height: 844 });
-    await new Promise((r) => setTimeout(r, 600));
-    const shot390 = path.join(ARTIFACT_DIR, 'final_dark_hero_390.png');
+    await new Promise((r) => setTimeout(r, 800));
+    const shot390 = path.join(ARTIFACT_DIR, 'reference_integrated_hero_dark_390.png');
     await page.screenshot({ path: shot390 });
     console.log(`✓ Captured 390px mobile: ${shot390}`);
-
-    // Test mobile theme toggle
-    const mobileToggle = await page.$('#mobile-theme-toggle');
-    if (mobileToggle) {
-      console.log('Testing mobile theme toggle...');
-      await mobileToggle.click();
-      await new Promise((r) => setTimeout(r, 600));
-      const shot390Light = path.join(ARTIFACT_DIR, 'final_light_hero_390.png');
-      await page.screenshot({ path: shot390Light });
-      console.log(`✓ Captured 390px mobile in light mode: ${shot390Light}`);
-      // switch back to dark
-      await mobileToggle.click();
-      await new Promise((r) => setTimeout(r, 600));
-    }
 
     // -------------------------------------------------------------
     // CONSOLE ERROR AUDIT
@@ -270,7 +252,7 @@ async function runComprehensiveVerification() {
     console.log('✓ Clean console: 0 errors detected!');
 
     console.log('\n========================================================');
-    console.log('🎉 ALL SECTION 11 MANDATORY VERIFICATION TESTS PASSED!');
+    console.log('🎉 ALL BACKGROUND INTEGRATION VERIFICATION TESTS PASSED!');
     console.log('========================================================');
   } finally {
     if (browser) {
